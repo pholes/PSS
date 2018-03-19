@@ -1,0 +1,869 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objectTemplate 
+                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                xmlns="http://midpoint.evolveum.com/xml/ns/public/common/common-3"
+                xmlns:c="http://midpoint.evolveum.com/xml/ns/public/common/common-3"
+                xmlns:t="http://prism.evolveum.com/xml/ns/public/types-3"
+                xmlns:org="http://midpoint.evolveum.com/xml/ns/public/common/org-3"
+                xmlns:q="http://prism.evolveum.com/xml/ns/public/query-3"                
+                oid="feed0000-0000-0SAP-00HR-PSS888888088" >                
+    <name>Employee Template (EXT)</name>    
+    
+    <!-- include import template -->        
+    <includeRef oid="feed0000-0000-0SAP-00HR-PSS888888110"/>
+    
+   <!-- attribute visibility -->
+   
+   <item>
+      <c:ref>name</c:ref>      
+      <limitations>
+         <layer>presentation</layer>
+         <access>            
+            <add>false</add>
+            <modify>false</modify>
+            <read>true</read>
+         </access>
+      </limitations>
+   </item>
+   
+   <item>
+      <c:ref>extension/voKonto</c:ref>      
+	<limitations>
+		<layer>presentation</layer>
+		<access>         
+            <add>false</add>
+			<!--
+			<read>false</read>
+            <modify>false</modify>
+            -->            
+         </access>
+         </limitations>
+      <displayOrder>80</displayOrder>
+   </item>
+   
+   <item>
+      <c:ref>fullName</c:ref>
+      <limitations>
+         <layer>presentation</layer>
+         <access>            
+            <add>false</add>
+            <modify>false</modify>
+            <read>true</read>
+         </access>
+      </limitations>
+      <displayOrder>90</displayOrder>
+   </item> 
+   
+   <item>
+      <c:ref>givenName</c:ref>
+      <limitations>
+         <minOccurs>1</minOccurs>
+         <maxOccurs>1</maxOccurs>         
+      <!--    <layer>presentation</layer>
+         <access>
+            <add>true</add>
+            <modify>true</modify>                        
+         </access>
+         -->
+      </limitations>      
+      <displayOrder>100</displayOrder>
+   </item>
+   
+   <item>
+      <c:ref>familyName</c:ref>
+      <limitations>
+         <minOccurs>1</minOccurs>
+         <maxOccurs>1</maxOccurs>
+         <!-- <layer>presentation</layer>
+         <access>
+            <add>true</add>
+            <modify>true</modify>                        
+         </access>
+         -->
+      </limitations>
+      <displayOrder>110</displayOrder>
+   </item>
+   
+   <item>
+      <c:ref>extension/company</c:ref>
+      
+      <limitations>
+         <minOccurs>1</minOccurs>
+         <maxOccurs>1</maxOccurs>         
+      <!-- 
+         <layer>presentation</layer>
+         <access>
+            <add>true</add>
+            <read>true</read> 
+            <modify>true</modify>           
+         </access>
+      -->
+      </limitations>      
+      <displayOrder>115</displayOrder>
+   </item>
+   
+   <item>
+      <c:ref>extension/givenFamilyName</c:ref>
+      <limitations>
+         <!-- 
+         <minOccurs>0</minOccurs>
+         <maxOccurs>1</maxOccurs>
+         -->
+         <layer>presentation</layer>
+         <access>         
+            <add>false</add>
+            <modify>false</modify>			
+			<read>false</read> 
+         </access>         
+      </limitations>      
+      <displayOrder>120</displayOrder>
+   </item>
+   
+   <item>
+      <c:ref>honorificPrefix</c:ref>
+      <!-- <limitations>
+         <layer>presentation</layer>
+         <access>
+            <read>false</read>
+            <add>true</add>
+            <modify>true</modify>
+         </access>
+      </limitations>
+      -->
+   </item>
+   
+   <item>
+      <c:ref>honorificSuffix</c:ref>      
+      <!-- 
+      <limitations>
+         <layer>presentation</layer>
+         <access>
+            <read>false</read>
+            <add>true</add>
+            <modify>true</modify>            
+         </access>
+      </limitations>
+      -->
+   </item>
+   
+   <item>
+      <c:ref>emailAddress</c:ref>
+		<limitations>
+		<layer>presentation</layer>
+		<access>
+            <read>true</read>            
+			<!--
+			<read>false</read>
+            <modify>false</modify>
+            -->            
+         </access>
+         </limitations>      
+      <displayOrder>130</displayOrder>
+   </item>
+   
+   <item>
+      <c:ref>employeeNumber</c:ref>		
+		<limitations>
+         <layer>presentation</layer>
+         <access>
+            <add>false</add>
+            <read>true</read>
+            <modify>false</modify>
+         </access>
+      </limitations>      
+      <displayOrder>140</displayOrder>
+   </item>
+   
+   <item>   
+      <c:ref>$user/employeeType</c:ref>
+	  <limitations>
+	  	<minOccurs>1</minOccurs>
+        <maxOccurs>1</maxOccurs>
+      </limitations>      
+      <displayOrder>150</displayOrder>      
+      <mapping>
+         <name>Force employeeType to EXT</name>      
+         <strength>weak</strength>
+         <expression>
+		    <value>EXT</value>
+		 </expression>
+		 <condition>       
+         <script>
+             <code>
+                 "add".equals(operation)
+             </code>
+         </script>        
+    	</condition>         
+      </mapping>      
+   </item>
+   
+	<item>
+      <c:ref>organization</c:ref> 
+      <limitations>
+         <!-- 
+         <minOccurs>0</minOccurs>
+         <maxOccurs>1</maxOccurs>
+         -->
+         <layer>presentation</layer>
+         <access>
+            <add>false</add>
+            <read>false</read> 
+            <modify>false</modify>           
+         </access>
+      </limitations>      
+      <displayOrder>155</displayOrder>
+   </item>   
+ 
+   <item>
+      <c:ref>extension/profession</c:ref>
+      <limitations>
+         <layer>presentation</layer>
+         <access>
+            <add>false</add>
+            <read>false</read> 
+            <modify>false</modify>           
+         </access>
+      </limitations>
+      <displayOrder>165</displayOrder>
+   </item>	 
+   
+   <!-- disable visibility of ID -->
+   
+   <item>
+      <c:ref>extension/professionID</c:ref>
+	  <limitations>
+         <layer>presentation</layer>
+         <access>
+            <add>false</add>
+            <read>false</read> 
+            <modify>false</modify>           
+         </access>
+      </limitations>
+      <displayOrder>170</displayOrder>
+   </item>	    
+   
+   <item>
+      <c:ref>costCenter</c:ref>      
+      <displayOrder>180</displayOrder>
+      <limitations>
+         <layer>presentation</layer>
+         <access>
+            <add>false</add>
+            <read>false</read> 
+            <modify>false</modify>           
+         </access>
+      </limitations>
+   </item>   
+   
+   <!-- disable visibility of ID -->
+   
+   <item>
+    <c:ref>extension/costCenterID</c:ref>
+  	<limitations>
+         <layer>presentation</layer>
+         <access>
+            <add>false</add>
+            <read>false</read> 
+            <modify>false</modify>           
+         </access>
+      </limitations>
+    <displayOrder>190</displayOrder>
+   </item>
+   
+	
+   <item>
+      <c:ref>organizationalUnit</c:ref>
+      <limitations>
+         <layer>presentation</layer>
+         <access>
+            <add>false</add>
+            <read>false</read> 
+            <modify>false</modify>           
+         </access>
+      </limitations>    
+      <displayOrder>200</displayOrder>      
+   </item> 
+
+<!-- disable visibility of ID -->
+    
+   <item>
+    <c:ref>extension/organizationID</c:ref>  	
+  	<limitations>
+         <layer>presentation</layer>
+         <access>
+            <add>false</add>
+            <read>false</read> 
+            <modify>false</modify>           
+         </access>
+      </limitations>      
+   <displayOrder>210</displayOrder>
+   </item>
+    
+
+   <item>
+      <c:ref>extension/mobile</c:ref>
+      <!-- 
+      <limitations>
+         <layer>presentation</layer>
+         <access>
+            <add>true</add>
+            <read>true</read> 
+            <modify>true</modify>           
+         </access>
+      </limitations>
+      -->
+      <displayOrder>220</displayOrder>
+   </item>
+
+   <item>
+      <c:ref>extension/ipTelNum</c:ref>      
+      <limitations>
+         <layer>presentation</layer>
+         <access>
+			<add>false</add>
+            <read>false</read> 
+            <modify>false</modify> 
+         </access>
+      </limitations>      
+      <displayOrder>230</displayOrder>
+   </item>   
+   
+   <item>
+      <c:ref>extension/streetAddress</c:ref>
+      <!-- 
+      <limitations>
+         <layer>presentation</layer>
+         <access>
+			<add>true</add>
+            <read>true</read> 
+            <modify>true</modify> 
+         </access>
+      </limitations>
+      -->
+      <displayOrder>230</displayOrder>      
+   </item>      
+
+   <item>
+      <c:ref>extension/propertyNumber</c:ref>
+      <!-- 
+      <limitations>
+         <layer>presentation</layer>
+         <access>
+			<add>true</add>
+            <read>true</read> 
+            <modify>true</modify> 
+         </access>
+      </limitations>
+      -->      
+      <displayOrder>240</displayOrder>
+   </item>    
+
+   <item>
+      <c:ref>extension/city</c:ref>
+      <!-- 
+      <limitations>
+         <layer>presentation</layer>
+         <access>
+			<add>true</add>
+            <read>true</read> 
+            <modify>true</modify> 
+         </access>
+      </limitations>
+      -->      
+      <displayOrder>250</displayOrder>
+   </item>    
+
+   <item>
+      <c:ref>extension/roomNumber</c:ref>
+      <!-- 
+      <limitations>
+         <layer>presentation</layer>
+         <access>
+			<add>true</add>
+            <read>true</read> 
+            <modify>true</modify> 
+         </access>
+      </limitations>
+      -->      
+      <displayOrder>260</displayOrder>
+   </item>    
+   
+   <item>
+      <c:ref>extension/cardNumber</c:ref>
+      <!-- 
+      <limitations>
+         <layer>presentation</layer>
+         <access>
+			<add>true</add>
+            <read>true</read> 
+            <modify>true</modify> 
+         </access>
+      </limitations>
+      -->      
+      <displayOrder>270</displayOrder>
+   </item>       
+   
+   <item>
+      <c:ref>extension/manager</c:ref>
+      <limitations>
+         <layer>presentation</layer>
+         <access>
+            <add>false</add>
+            <read>false</read> 
+            <modify>false</modify>            
+         </access>
+      </limitations>	  
+  <displayOrder>280</displayOrder>
+   </item>       
+
+   <item>
+      <c:ref>$user/extension/evidentiaryStatus</c:ref>       
+      <limitations>
+         <layer>presentation</layer>
+         <access>
+            <add>false</add>
+            <read>true</read> 
+            <modify>false</modify>           
+         </access>
+      </limitations>      
+      <mapping>
+         <name>Force evidentiaryStatus to ACTIVE (only for add operation)</name>      
+         <strength>strong</strength>
+         <expression>
+		    <value>ACTIVE</value>
+		 </expression>
+		<condition>       
+         <script>
+             <code>
+                 "add".equals(operation)
+             </code>
+         </script>        
+    </condition>
+      </mapping>            
+      <displayOrder>290</displayOrder>
+   </item> 
+
+   <item>
+      <c:ref>extension/jira</c:ref>
+      <!-- 
+      <limitations>
+         <layer>presentation</layer>
+         <access>
+            <add>false</add>
+            <read>true</read> 
+            <modify>false</modify>           
+         </access>
+      </limitations>
+      -->
+      <displayOrder>300</displayOrder>
+   </item> 
+
+   <item>
+      <c:ref>extension/comment</c:ref>      
+      <limitations>
+         <layer>presentation</layer>
+         <access>
+            <add>false</add>
+            <read>false</read> 
+            <modify>false</modify>           
+         </access>
+      </limitations>      
+     <displayOrder>310</displayOrder>
+   </item>
+    
+   <item>
+      <c:ref>extension/startDate</c:ref>      
+      <limitations>
+         <layer>presentation</layer>
+         <access>
+            <add>false</add>
+            <read>false</read> 
+            <modify>false</modify>           
+         </access>
+      </limitations>      
+      <displayOrder>350</displayOrder>
+   </item> 
+     
+   <item>
+      <c:ref>extension/managerID</c:ref>       
+      <limitations>
+         <layer>presentation</layer>
+         <access>
+            <add>false</add>
+            <read>false</read> 
+            <modify>false</modify>           
+         </access>
+      </limitations>      
+      <displayOrder>360</displayOrder>
+   </item>
+   
+   <item>
+      <c:ref>extension/managerEmail</c:ref>       
+      <limitations>
+         <layer>presentation</layer>
+         <access>
+            <add>false</add>
+            <read>false</read> 
+            <modify>false</modify>           
+         </access>
+      </limitations>              
+      <displayOrder>370</displayOrder>
+   </item>
+   
+   <item>
+      <c:ref>extension/regionalManager</c:ref>      
+      <limitations>
+         <layer>presentation</layer>
+         <access>
+            <add>false</add>
+            <read>false</read> 
+            <modify>false</modify>           
+         </access>
+      </limitations>              
+      <displayOrder>380</displayOrder>
+   </item>
+   
+   <item>
+      <c:ref>extension/regionalManagerID</c:ref>      
+      <limitations>
+         <layer>presentation</layer>
+         <access>
+            <add>false</add>
+            <read>false</read> 
+            <modify>false</modify>           
+         </access>
+      </limitations>              
+      <displayOrder>390</displayOrder>
+   </item>
+   
+   <item>
+      <c:ref>extension/regionalManagerEmail</c:ref>       
+      <limitations>
+         <layer>presentation</layer>
+         <access>
+            <add>false</add>
+            <read>false</read> 
+            <modify>false</modify>           
+         </access>
+      </limitations>              
+      <displayOrder>400</displayOrder>
+   </item>
+   
+   <item>
+      <c:ref>extension/regionalIT</c:ref>      
+      <limitations>
+         <layer>presentation</layer>
+         <access>
+            <add>false</add>
+            <read>false</read> 
+            <modify>false</modify>           
+         </access>
+      </limitations>              
+      <displayOrder>410</displayOrder>
+   </item>
+   
+   <item>
+      <c:ref>extension/nbsCertificate</c:ref>       
+      <limitations>
+         <layer>presentation</layer>
+         <access>
+            <add>false</add>
+            <read>false</read> 
+            <modify>false</modify>           
+         </access>
+      </limitations>        
+      <displayOrder>420</displayOrder>
+   </item>
+   
+   <item>
+      <c:ref>extension/nbsCertificate2</c:ref>       
+      <limitations>
+         <layer>presentation</layer>
+         <access>
+            <add>false</add>
+            <read>false</read> 
+            <modify>false</modify>           
+         </access>
+      </limitations>
+      <displayOrder>430</displayOrder>
+   </item>
+   
+   <item>
+      <c:ref>extension/nbsCertificate3</c:ref>      
+      <limitations>
+         <layer>presentation</layer>
+         <access>
+            <add>false</add>
+            <read>false</read> 
+            <modify>false</modify>           
+         </access>
+      </limitations>      
+      <displayOrder>440</displayOrder>
+   </item>
+   
+   <item>
+      <c:ref>extension/assetNumber</c:ref>      
+      <limitations>
+         <layer>presentation</layer>
+         <access>
+            <add>false</add>
+            <read>false</read> 
+            <modify>false</modify>           
+         </access>
+      </limitations>      
+      <displayOrder>450</displayOrder>
+   </item>
+   
+   <item>
+      <c:ref>extension/companyEmail</c:ref>
+      <!-- 
+      <limitations>
+         <layer>presentation</layer>
+         <access>
+            <add>true</add>
+            <read>true</read> 
+            <modify>true</modify> 
+         </access>
+      </limitations>
+      -->        
+      <displayOrder>460</displayOrder>
+   </item>
+   
+   <item>
+      <c:ref>extension/initialPassword</c:ref>       
+      <limitations>
+         <layer>presentation</layer>
+         <access>
+            <add>false</add>
+            <read>false</read> 
+            <modify>false</modify>           
+         </access>
+      </limitations>      
+      <!-- TODO mapovanie inicialneho hesla na midpoint heslo, kvoli reset hesla -->
+      <displayOrder>480</displayOrder>      
+   </item>
+   
+   <!-- POKUS -->
+   <item>
+      <c:ref>activation/validityStatus</c:ref>
+      <!-- 
+      <limitations>
+         <layer>presentation</layer>
+         <access>
+            <add>true</add>
+            <read>true</read> 
+            <modify>true</modify>           
+         </access>
+      </limitations>
+      -->      
+      <!-- TODO mapovanie inicialneho hesla na midpoint heslo, kvoli reset hesla -->      
+   </item>
+   
+   <item>
+      <c:ref>activation/validityChangeTimestamp</c:ref>
+      <!-- 
+      <limitations>
+         <layer>presentation</layer>
+         <access>
+            <add>true</add>
+            <read>true</read> 
+            <modify>true</modify>           
+         </access>
+      </limitations>
+      -->      
+      <!-- TODO mapovanie inicialneho hesla na midpoint heslo, kvoli reset hesla -->      
+   </item>
+   
+   <!-- <item>
+      <c:ref>activation/validFrom</c:ref>
+      <limitations>
+         <layer>presentation</layer>
+         <access>
+            <add>true</add>
+            <read>true</read> 
+            <modify>true</modify>           
+         </access>
+      </limitations>
+   </item>
+   -->
+   
+   <!-- END POKUS -->
+   <item>
+      <c:ref>activation/administrativeStatus</c:ref>      
+      <!-- 
+      <limitations>
+         <layer>presentation</layer>
+         <access>
+            <add>true</add>
+            <read>true</read> 
+            <modify>true</modify>
+         </access>
+      </limitations>
+      -->
+      <mapping>
+         <name>Force administrativeStatus to ACTIVE (only for add operation)</name>      
+         <strength>weak</strength>
+         <expression>
+		    <value>enabled</value>
+		 </expression>
+		<condition>       
+         <script>
+             <code>
+                 "add".equals(operation)
+             </code>
+         </script>        
+    </condition>
+      </mapping>      
+      <displayOrder>490</displayOrder>
+   </item>
+
+	<!-- nastavenie datumu na sysdate -->
+	<item>
+      <c:ref>activation/validFrom</c:ref>
+      <mapping>
+         <name>Force creationDate (validFrom) to SYSDATE (only for add operation)</name>      
+         <strength>weak</strength>
+         <expression>
+		    <script>
+		    	<code>
+		    	import java.text.SimpleDateFormat; 
+		    	Calendar cal = Calendar.getInstance(); 
+		    	cal.add(Calendar.DATE, +0); 
+		    	new SimpleDateFormat("yyyy-MM-dd").format(cal.getTime());
+		    	
+		    	//return basic.currentDateTime();
+		    	</code>
+		    </script>
+		 </expression>
+		<condition>       
+         <script>
+             <code>
+                 "add".equals(operation)
+             </code>
+         </script>        
+    </condition>
+      </mapping>      
+      <displayOrder>490</displayOrder>
+   </item>
+   <!-- nastavenie datumu na sysdate +12mesiacov -->
+   <item>
+      <c:ref>activation/validTo</c:ref>      
+      <limitations>
+      	 <minOccurs>0</minOccurs>
+         <maxOccurs>1</maxOccurs>
+      </limitations>
+      <mapping>
+         <name>Force endDate (validTo) to SYSDATE+12month (only for add operation)</name>      
+         <strength>weak</strength>
+         <expression>
+		    <script>
+		    	<!-- enforce SYSDATE +365days -->
+		    	<code>
+		    	import java.text.SimpleDateFormat; 
+		    	Calendar cal = Calendar.getInstance(); 
+		    	cal.add(Calendar.DATE, +365); 
+		    	new SimpleDateFormat("yyyy-MM-dd").format(cal.getTime());		    	
+		    	</code>
+		    </script>
+		 </expression>
+		<condition>       
+         <script>
+             <code>
+                 "add".equals(operation)
+             </code>
+         </script>        
+    </condition>
+      </mapping>      
+      <displayOrder>490</displayOrder>
+   </item>
+   
+   <item>
+      <c:ref>extension/objectSID</c:ref>
+      <limitations>
+         <layer>presentation</layer>
+         <access>
+            <add>false</add>
+            <read>true</read> 
+            <modify>false</modify>           
+         </access>
+      </limitations>  
+      <displayOrder>500</displayOrder>
+   </item>
+        
+   <!-- iteration -->
+    <iteration>
+      <maxIterations>20</maxIterations>
+      <tokenExpression>
+         <script>
+            <code>
+                    if (iteration == 0) {
+                        return "";
+                    } else {
+                        return "" + (iteration + 1);
+                    }
+                </code>
+         </script>
+      </tokenExpression>
+   </iteration>
+
+ <!-- Generate employeeNumber for External Employee-->   
+   <mapping>
+    <name>Generate employeeNumber for External</name>
+    <strength>weak</strength>
+    <source>
+       <c:path>$user/activation/administrativeStatus</c:path>
+    </source>
+    <source>
+       <c:path>$user/employeeType</c:path>
+    </source>
+    <expression>
+        <sequentialValue>
+            <sequenceRef oid="feed0000-0000-0000-0SEQ-PSS555555100"/>
+        </sequentialValue>
+    </expression>
+    <target>
+        <path>$user/employeeNumber</path>
+    </target>
+    <condition>
+            <script>
+               <code>   
+               "add".equals(operation) &amp;&amp;
+               employeeType == 'EXT' &amp;&amp;               
+               !com.evolveum.midpoint.xml.ns._public.common.common_3.ActivationStatusType.DISABLED.equals(administrativeStatus)&amp;&amp;
+               !com.evolveum.midpoint.xml.ns._public.common.common_3.ActivationStatusType.ARCHIVED.equals(administrativeStatus)</code>
+            </script>
+         </condition>    
+  </mapping>
+  
+  <!-- role assignments -->   
+    
+    <mapping>
+      <name>Priradenie role: Externista PSS, administrativeStatus=ENABLED</name>      
+      <strength>strong</strength>
+      <source>
+         <name>employeeType</name>
+         <c:path>$user/employeeType</c:path>
+      </source>
+      <source>
+            <path>$user/activation/administrativeStatus</path>
+        </source>
+      <expression>        
+            <assignmentTargetSearch>
+                <targetType>c:RoleType</targetType>
+                <oid>feed0000-0000-0000-0000-PSS000000102</oid> <!-- Externista PSS -->
+            </assignmentTargetSearch>        
+      </expression>
+      <target>
+         <c:path>assignment</c:path>
+      </target>      
+      <condition>       
+            <script>
+                <code>
+                    employeeType == 'EXT' &amp;&amp;
+                    !com.evolveum.midpoint.xml.ns._public.common.common_3.ActivationStatusType.DISABLED.equals(administrativeStatus)&amp;&amp;
+                    !com.evolveum.midpoint.xml.ns._public.common.common_3.ActivationStatusType.ARCHIVED.equals(administrativeStatus)
+                </code>
+            </script>        
+    </condition>
+   </mapping>  
+</objectTemplate>

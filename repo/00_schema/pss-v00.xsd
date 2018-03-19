@@ -1,0 +1,592 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xsd:schema elementFormDefault="qualified"
+			targetNamespace="http://pss.sk"
+			xmlns:tns="http://pss.sk"
+			xmlns:a="http://prism.evolveum.com/xml/ns/public/annotation-3"
+			xmlns:c="http://midpoint.evolveum.com/xml/ns/public/common/common-3"
+		        xmlns:t="http://prism.evolveum.com/xml/ns/public/types-3"
+			xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+<xsd:import namespace="http://midpoint.evolveum.com/xml/ns/public/common/common-3"
+schemaLocation="http://midpoint.evolveum.com/xml/ns/public/common/common-3">
+</xsd:import>
+<xsd:import namespace="http://prism.evolveum.com/xml/ns/public/types-3"/>
+
+<xsd:complexType name="UserExtensionType">
+		<xsd:annotation>
+			<xsd:appinfo>
+				<a:extension ref="c:UserType"/>
+			</xsd:appinfo>
+		</xsd:annotation>
+<xsd:sequence>
+
+	<!-- Rodne meno osoby, pre FTE/TE/OZ, zdroj SAP/IBP -->
+	<xsd:element name="givenFamilyName" type="xsd:string" minOccurs="0" maxOccurs="1">
+		<xsd:annotation>
+			<xsd:appinfo>
+				<a:indexed>true</a:indexed>
+			<!--	<a:displayName>Rodné meno</a:displayName> -->
+				<a:displayOrder>1000</a:displayOrder>
+				<a:help>Rodné meno osoby</a:help>
+			</xsd:appinfo>
+		</xsd:annotation>
+	</xsd:element>
+
+	<!-- Evidentiary status(enum: 0-maternity leave, 1-valid internal employee), [STATUS]-->
+	<xsd:element name="evidentiaryStatus" type="xsd:string" minOccurs="0" maxOccurs="1">
+		<xsd:annotation>
+			<xsd:appinfo>
+				<a:indexed>true</a:indexed>
+			<!--	<a:displayName>HR Evidenčný stav</a:displayName> -->
+				<a:displayOrder>100010</a:displayOrder>
+				<a:help>Evidenčný stav osoby</a:help>
+			</xsd:appinfo>
+		</xsd:annotation>
+	</xsd:element>
+
+	<!-- Datum zacatia pracovneho pomeru, pre FTE aj TE, zdroj SAP -->
+	<!-- neviem ci zatial vyuzijeme, mozno budeme mapovat na validFrom -->
+	<xsd:element name="startDate" type="xsd:dateTime" minOccurs="0" maxOccurs="1">
+		<xsd:annotation>
+			<xsd:appinfo>
+				<a:indexed>true</a:indexed>
+			<!--	<a:displayName>Dátum nástupu</a:displayName> -->
+				<a:displayOrder>100020</a:displayOrder>
+				<a:help>Dátum skutočného nástupu zamestnanca</a:help>
+			</xsd:appinfo>
+		</xsd:annotation>
+	</xsd:element>
+
+	<!-- Mobilne cislo, pre FTE, zdroj SAP -->
+	<xsd:element name="mobile" type="xsd:string" minOccurs="0" maxOccurs="1">
+		<xsd:annotation>
+			<xsd:appinfo>
+				<a:indexed>true</a:indexed>
+			<!--	<a:displayName>Mobilné číslo</a:displayName> -->
+				<a:displayOrder>1040</a:displayOrder>
+				<a:help>Mobilné číslo osoby</a:help>
+			</xsd:appinfo>
+		</xsd:annotation>
+	</xsd:element>
+
+	<!-- Klapka, pre FTE, zdroj SAP -->
+	<xsd:element name="ipTelNum" type="xsd:string" minOccurs="0" maxOccurs="1">
+		<xsd:annotation>
+			<xsd:appinfo>
+				<a:indexed>true</a:indexed>
+			<!--	<a:displayName>Klapka</a:displayName> -->
+				<a:displayOrder>1070</a:displayOrder>
+				<a:help>Klapka</a:help>
+			</xsd:appinfo>
+		</xsd:annotation>
+	</xsd:element>
+	
+	<!-- Nazov pracovnej pozicie (profesie), pre FTE, zdroj SAP -->
+	<xsd:element name="profession" type="xsd:string" minOccurs="0" maxOccurs="1">
+		<xsd:annotation>
+			<xsd:appinfo>
+				<a:indexed>true</a:indexed>
+			<!--	<a:displayName>Názov profesie</a:displayName> -->
+				<a:displayOrder>1200</a:displayOrder>
+				<a:help>Názov pracovného miesta</a:help>
+			</xsd:appinfo>
+		</xsd:annotation>
+	</xsd:element>
+	
+	<!-- Identifikator pracovnej pozicie (profesie), pre FTE, zdroj SAP -->
+	<xsd:element name="professionID" type="xsd:string" minOccurs="0" maxOccurs="1">
+		<xsd:annotation>
+			<xsd:appinfo>
+				<a:indexed>true</a:indexed>
+			<!--	<a:displayName>ID Profesie</a:displayName> -->
+				<a:displayOrder>1250</a:displayOrder>
+				<a:help>Identifikator profesie</a:help>
+			</xsd:appinfo>
+		</xsd:annotation>
+	</xsd:element>
+	
+	<!-- Identifikator utvaru , pre FTE aj TE zdroj SAP -->
+	<xsd:element name="organizationID" type="xsd:string" minOccurs="0" maxOccurs="1">
+		<xsd:annotation>
+			<xsd:appinfo>
+				<a:indexed>true</a:indexed>
+			<!--	<a:displayName>ID útvaru</a:displayName> -->
+				<a:displayOrder>1300</a:displayOrder>
+				<a:help>Identifikátor organizačnej jednotky</a:help>
+			</xsd:appinfo>
+		</xsd:annotation>
+	</xsd:element>
+
+	<!-- Nakladove stredisko/utvar, pre FTE,EXT aj TE zdroj SAP/IBP?-->
+	<xsd:element name="costCenterID" type="xsd:string" minOccurs="0" maxOccurs="1">
+		<xsd:annotation>
+			<xsd:appinfo>
+				<a:indexed>true</a:indexed>
+			<!--	<a:displayName>ID Nákladového strediska</a:displayName> -->
+				<a:displayOrder>1400</a:displayOrder>
+				<a:help>Identifikator nákladového strediska</a:help>
+			</xsd:appinfo>
+		</xsd:annotation>
+	</xsd:element>
+
+	
+	<!-- Pracovisko: ulica, pre FTE,EXT aj TE zdroj SAP-->
+	<xsd:element name="streetAddress" type="xsd:string" minOccurs="0" maxOccurs="1">
+		<xsd:annotation>
+			<xsd:appinfo>
+				<a:indexed>true</a:indexed>
+			<!--	<a:displayName>Pracovisko: Ulica</a:displayName> -->
+				<a:displayOrder>1500</a:displayOrder>
+				<a:help>Adresa pracoviska, ulica</a:help>
+			</xsd:appinfo>
+		</xsd:annotation>
+	</xsd:element>
+	
+	<!-- Pracovisko: cislo domu, pre FTE,EXT aj TE zdroj SAP-->
+	<xsd:element name="propertyNumber" type="xsd:string" minOccurs="0" maxOccurs="1">
+		<xsd:annotation>
+			<xsd:appinfo>
+				<a:indexed>true</a:indexed>
+			<!--	<a:displayName>Pracovisko: Číslo domu</a:displayName> -->
+				<a:displayOrder>1510</a:displayOrder>
+				<a:help>Adresa pracoviska, popisné číslo domu</a:help>
+			</xsd:appinfo>
+		</xsd:annotation>
+	</xsd:element>
+	
+	<!-- Pracovisko: mesto, pre FTE,EXT aj TE zdroj SAP-->
+	<xsd:element name="city" type="xsd:string" minOccurs="0" maxOccurs="1">
+		<xsd:annotation>
+			<xsd:appinfo>
+				<a:indexed>true</a:indexed>
+			<!--	<a:displayName>Pracovisko: Mesto</a:displayName> -->
+				<a:displayOrder>1520</a:displayOrder>
+				<a:help>Adresa pracoviska, mesto</a:help>
+			</xsd:appinfo>
+		</xsd:annotation>
+	</xsd:element>
+	
+	<!-- cislo kancelarie, pre FTE, zdroj SAP-->
+	<xsd:element name="roomNumber" type="xsd:string" minOccurs="0" maxOccurs="1">
+		<xsd:annotation>
+			<xsd:appinfo>
+				<a:indexed>true</a:indexed>
+			<!--	<a:displayName>Pracovisko: Číslo kancelárie</a:displayName> -->
+				<a:displayOrder>1530</a:displayOrder>
+				<a:help>Adresa pracoviska, číslo kancelárie</a:help>
+			</xsd:appinfo>
+		</xsd:annotation>
+	</xsd:element>
+	
+	<!-- cislo vstupnej karty, pre FTE, EXT aj TE, zdroj SAP/manual -->
+	<xsd:element name="cardNumber" type="xsd:string" minOccurs="0" maxOccurs="1">
+		<xsd:annotation>
+			<xsd:appinfo>
+				<a:indexed>true</a:indexed>
+			<!--	<a:displayName>Číslo vstupnej karty</a:displayName> -->
+				<a:displayOrder>1540</a:displayOrder>
+				<a:help>Číslo vstupnej karty</a:help>
+			</xsd:appinfo>
+		</xsd:annotation>
+	</xsd:element>
+
+	<!-- Linka na JIRA (manualne doplni PSS) -->
+	<xsd:element name="jira" type="xsd:string" minOccurs="0" maxOccurs="1">
+		<xsd:annotation>
+			<xsd:appinfo>
+				<a:indexed>true</a:indexed>
+			<!--	<a:displayName>JIRA link</a:displayName> -->
+				<a:displayOrder>1800</a:displayOrder>
+				<a:help>Link na žiadosti v JIRA</a:help>
+			</xsd:appinfo>
+		</xsd:annotation>
+	</xsd:element>
+
+	<!-- poznamka, zatial nema vyuzitie -->
+	<xsd:element name="comment" type="xsd:string" minOccurs="0" maxOccurs="unbounded">
+		<xsd:annotation>
+			<xsd:appinfo>
+				<a:indexed>true</a:indexed>
+			<!--	<a:displayName>Poznámka</a:displayName> -->
+				<a:displayOrder>1810</a:displayOrder>
+				<a:help>Poznánka</a:help>
+			</xsd:appinfo>
+		</xsd:annotation>
+	</xsd:element>
+	
+	<!-- priznak ci je osoba aj nadraidenym, plati pre OZ aj pre FTE-->
+	<xsd:element name="manager" type="xsd:boolean" minOccurs="0" maxOccurs="1">
+		<xsd:annotation>
+			<xsd:appinfo>
+				<a:indexed>true</a:indexed>
+			<!--	<a:displayName>Vlastník útvaru</a:displayName> -->
+				<a:displayOrder>2000</a:displayOrder>
+				<a:help>Príznak označujúci vlastníka útvaru/nadriadeného/schvaľovatela</a:help>
+			</xsd:appinfo>
+		</xsd:annotation>
+	</xsd:element>		
+
+	<xsd:element name="initialPassword" type="t:ProtectedStringType" minOccurs="0" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:appinfo>
+                        <a:indexed>false</a:indexed>
+<!--                    <a:operational>true</a:operational> true=hidden -->
+                  <!--  <a:displayName>Iniciálne heslo</a:displayName> -->
+                        <a:displayOrder>100900</a:displayOrder>
+                    </xsd:appinfo>
+                </xsd:annotation>
+            </xsd:element>
+
+	<!-- extension attributes for Obchodny zastupca -->
+
+	<!-- emailova adresa na nadriadeneho, plati pre OZ-->
+	<xsd:element name="managerEmail" type="xsd:string" minOccurs="0" maxOccurs="1">
+		<xsd:annotation>
+		    <xsd:appinfo>
+			<a:indexed>true</a:indexed>
+<!--			<a:displayName>Email na nadriadeného</a:displayName> -->
+			<a:displayOrder>2050</a:displayOrder>
+			<a:help>Email adresa nadriadeného (pre OZ)</a:help>
+		    </xsd:appinfo>
+		</xsd:annotation>
+	</xsd:element>
+
+	<!-- priznak ci je osoba aj regionalnym riaditelom, plati pre OZ-->
+	<xsd:element name="regionalManager" type="xsd:boolean" minOccurs="0" maxOccurs="1">
+		<xsd:annotation>
+			<xsd:appinfo>
+				<a:indexed>true</a:indexed>
+<!--				<a:displayName>Regionálny riaditeľ</a:displayName> -->
+				<a:displayOrder>2060</a:displayOrder>
+				<a:help>Príznak označujúci Regionáneho riaditeľa (pre OZ)</a:help>
+			</xsd:appinfo>
+		</xsd:annotation>
+	</xsd:element>	
+	
+	<!-- cislo VO konta regionalneho nadriadeneho, plati pre OZ-->
+	<xsd:element name="regionalManagerID" type="xsd:string" minOccurs="0" maxOccurs="1">
+		<xsd:annotation>
+			<xsd:appinfo>
+				<a:indexed>true</a:indexed>
+<!--				<a:displayName>Regionálny riaditeľa (VO)</a:displayName> -->
+				<a:displayOrder>2070</a:displayOrder>
+				<a:help>Identifikátor regionáneho riaditeľa (pre OZ)</a:help>
+			</xsd:appinfo>
+		</xsd:annotation>
+	</xsd:element>
+	
+	<!-- emailova adresa regionalneho nadriadeneho, plati pre OZ-->
+	<xsd:element name="regionalManagerEmail" type="xsd:string" minOccurs="0" maxOccurs="1">
+		<xsd:annotation>
+			<xsd:appinfo>
+				<a:indexed>true</a:indexed>
+<!--				<a:displayName>Email regionálny riaditeľ</a:displayName> -->
+				<a:displayOrder>2080</a:displayOrder>
+				<a:help>Emailová adresa na regionáneho riaditeľa (pre OZ)</a:help>
+			</xsd:appinfo>
+		</xsd:annotation>
+	</xsd:element>
+
+	<!-- emailova adresa regionalneho IT, budeme pouzivat pri nastupe/zmene regionu, plati pre OZ-->
+	<xsd:element name="regionalIT" type="xsd:string" minOccurs="0" maxOccurs="1">
+		<xsd:annotation>
+			<xsd:appinfo>
+				<a:indexed>true</a:indexed>
+<!--				<a:displayName>Regionálne IT</a:displayName> -->
+				<a:displayOrder>3000</a:displayOrder>
+				<a:help>Emailová adresa Regionálneho IT (pre OZ)</a:help>
+			</xsd:appinfo>
+		</xsd:annotation>
+	</xsd:element>
+
+	<!-- cislo VO konta nadriadeneho, plati pre OZ-->
+	<xsd:element name="managerID" type="xsd:string" minOccurs="0" maxOccurs="1">
+		<xsd:annotation>
+			<xsd:appinfo>
+				<a:indexed>true</a:indexed>
+<!--				<a:displayName>TeamLeader (VO)</a:displayName> -->
+				<a:displayOrder>2040</a:displayOrder>
+				<a:help>Identifikátor nadriadeného zamestnanca (pre OZ)</a:help>
+			</xsd:appinfo>
+		</xsd:annotation>
+	</xsd:element>
+	
+	<!-- Úverový podregister, registracne cislo NBS, plati pre OZ-->
+	<xsd:element name="nbsCertificate" type="xsd:string" minOccurs="0" maxOccurs="1">
+		<xsd:annotation>
+			<xsd:appinfo>
+				<a:indexed>true</a:indexed>
+<!--				<a:displayName>Úverový podregister</a:displayName> -->
+				<a:displayOrder>3100</a:displayOrder>
+				<a:help>Úverový podregister, registrovaný v NBS</a:help>
+			</xsd:appinfo>
+		</xsd:annotation>
+	</xsd:element>
+
+	<!-- Vkladový podregister, registracne cislo NBS, plati pre OZ-->
+	<xsd:element name="nbsCertificate2" type="xsd:string" minOccurs="0" maxOccurs="1">
+		<xsd:annotation>
+			<xsd:appinfo>
+				<a:indexed>true</a:indexed>
+<!--				<a:displayName>Vkladový podregister</a:displayName> -->
+				<a:displayOrder>3100</a:displayOrder>
+				<a:help>Vkladový podregister, registrovaný v NBS</a:help>
+			</xsd:appinfo>
+		</xsd:annotation>
+	</xsd:element>
+
+	<!-- Poistný podregister, registracne cislo NBS, plati pre OZ-->
+	<xsd:element name="nbsCertificate3" type="xsd:string" minOccurs="0" maxOccurs="1">
+		<xsd:annotation>
+			<xsd:appinfo>
+				<a:indexed>true</a:indexed>
+<!--				<a:displayName>Poistný podregister</a:displayName> -->
+				<a:displayOrder>3100</a:displayOrder>
+				<a:help>Poistný podregister, registrovaný v NBS</a:help>
+			</xsd:appinfo>
+		</xsd:annotation>
+	</xsd:element>
+
+	<!-- cislo mobilneho kompletu, plati pre OZ-->
+	<xsd:element name="assetNumber" type="xsd:string" minOccurs="0" maxOccurs="unbounded">
+		<xsd:annotation>
+			<xsd:appinfo>
+				<a:indexed>true</a:indexed>
+<!--				<a:displayName>Mobilný komplet</a:displayName> -->
+				<a:displayOrder>3200</a:displayOrder>
+				<a:help>Číslo mobilného kompletu</a:help>
+			</xsd:appinfo>
+		</xsd:annotation>
+	</xsd:element>
+
+	<!-- extension attributes for External -->	
+	<!-- emailova adresa - firemny email, plati pre Externistov-->
+	<xsd:element name="companyEmail" type="xsd:string" minOccurs="0" maxOccurs="1">
+		<xsd:annotation>
+			<xsd:appinfo>
+				<a:indexed>true</a:indexed>
+<!--				<a:displayName>Firemný email</a:displayName> -->
+				<a:displayOrder>5000</a:displayOrder>
+				<a:help>Firemná emailová adresa (pre OZ/EXT)</a:help>
+			</xsd:appinfo>
+		</xsd:annotation>
+	</xsd:element>
+	
+	<!-- názov dodavatelskej firmy, plati pre Externistov-->
+	<xsd:element name="company" type="xsd:string" minOccurs="0" maxOccurs="1">
+		<xsd:annotation>
+			<xsd:appinfo>
+				<a:indexed>true</a:indexed>
+<!--				<a:displayName>Názov spoločnosti</a:displayName> -->
+				<a:displayOrder>5100</a:displayOrder>
+				<a:help>Názov spoločnosti (pre EXT)</a:help>
+			</xsd:appinfo>
+		</xsd:annotation>
+	</xsd:element>
+
+	<!-- IBP identifikator pre zamestnancov - VOKONTO -->
+	<xsd:element name="voKonto" type="xsd:string" minOccurs="0" maxOccurs="1">
+		<xsd:annotation>
+			<xsd:appinfo>
+				<a:indexed>true</a:indexed>
+<!--				<a:displayName>VO Konto</a:displayName> -->
+				<a:displayOrder>5200</a:displayOrder>
+				<a:help>Identifikator VOKonta v KWERIA</a:help>
+			</xsd:appinfo>
+		</xsd:annotation>
+	</xsd:element>
+
+	<!-- IBP identifikator pre zamestnancov - VOKONTO-->
+	<xsd:element name="objectSID" type="xsd:string" minOccurs="0" maxOccurs="1">
+		<xsd:annotation>
+			<xsd:appinfo>
+				<a:indexed>true</a:indexed>
+<!--				<a:displayName>ObjectSID</a:displayName> -->
+				<a:displayOrder>5300</a:displayOrder>
+				<a:help>Object SID z AD</a:help>
+			</xsd:appinfo>
+		</xsd:annotation>
+	</xsd:element>
+
+
+	</xsd:sequence>
+	</xsd:complexType>
+		
+	<xsd:complexType name="OrgExtensionType">
+	<xsd:annotation>
+		<xsd:appinfo>
+			<a:extension ref="c:OrgType"/>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:sequence>
+
+	<!-- skrateny nazov OU (mozno pouzijeme v displayName,ak budu mat vsetky OU naplnene. Format: Name (shortName) -->
+	<xsd:element name="shortName" type="xsd:string" minOccurs="0" maxOccurs="1">
+		<xsd:annotation>
+			<xsd:appinfo>
+				<a:indexed>true</a:indexed>
+<!--				<a:displayName>Skrátené meno</a:displayName>-->
+				<a:help>Skrátené meno organizačnej jednotky</a:help>
+				<a:displayOrder>30000</a:displayOrder>
+			</xsd:appinfo>
+		</xsd:annotation>
+	</xsd:element>
+			
+	<!-- identifikator vlastnika utvaru, vyuzijeme pri schvalovani, pravidlom nastavime OU Approver -->
+	<xsd:element name="approverIdentifier" type="xsd:string" minOccurs="0" maxOccurs="1">
+		<xsd:annotation>
+			<xsd:appinfo>
+				<a:indexed>true</a:indexed>
+<!--				<a:displayName>Id Schvalovatela</a:displayName>-->
+				<a:help>Osobné číslo schvaľovatela</a:help>
+				<a:displayOrder>30050</a:displayOrder>
+			</xsd:appinfo>
+		</xsd:annotation>
+	</xsd:element>
+	
+	<!-- identifikator nadradenej OU, podla hodnoty sa org.jednotka priradi k do liniovej org.struktury -->
+	<xsd:element name="parentOrgUnitIdentifier" type="xsd:string" minOccurs="0" maxOccurs="1">
+        <xsd:annotation>
+			<xsd:appinfo>
+				<a:indexed>true</a:indexed>
+<!--				<a:displayName>ID Nadriadenej OU</a:displayName>-->
+				<a:help>ID Nadriadenej Organizačnej jednotky</a:help>
+				<a:displayOrder>30100</a:displayOrder>
+			</xsd:appinfo>
+		</xsd:annotation>
+	</xsd:element>
+
+	<!-- nakladove stredisko, podla SAP -->
+	<xsd:element name="costCenterID" type="xsd:string" minOccurs="0" maxOccurs="1">
+		<xsd:annotation>
+			<xsd:appinfo>
+				<a:indexed>true</a:indexed>
+<!--				<a:displayName>ID Nákladového strediska</a:displayName> -->
+				<a:help>Identifikátor nákladového strediska</a:help>
+				<a:displayOrder>30150</a:displayOrder>
+			</xsd:appinfo>
+		</xsd:annotation>
+	</xsd:element>
+	</xsd:sequence>	
+	</xsd:complexType>
+	
+	<xsd:complexType name="RoleExtensionType">
+	<xsd:annotation>
+		<xsd:appinfo>
+			<a:extension ref="c:RoleType"/>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:sequence>
+	
+	<!-- identifikator pracovneho miesta, ak ma identita rovnaku hodnotu, rola sa automaticky priradi -->		
+	<xsd:element name="jobCode" type="xsd:string" minOccurs="0" maxOccurs="unbounded">
+        <xsd:annotation>
+			<xsd:appinfo>
+				<a:indexed>true</a:indexed>
+<!--				<a:displayName>Profesia</a:displayName> -->
+				<a:help>Identifikátor profesie, ku ktorej sa rola prideľuje</a:help>
+				<a:displayOrder>40000</a:displayOrder>
+			</xsd:appinfo>
+		</xsd:annotation>
+	</xsd:element>
+	
+	<!-- identifikator lokality / prislusnost k org. strukture, ak ma identita rovnaku hodnotu, rola sa automaticky priradi -->	
+	<xsd:element name="locality" type="xsd:string" minOccurs="0" maxOccurs="unbounded">
+		<xsd:annotation>
+			<xsd:appinfo>
+				<a:indexed>true</a:indexed>
+<!--				<a:displayName>Lokalita</a:displayName> -->
+				<a:displayOrder>40050</a:displayOrder>
+				<a:help>Identifikátor lokality, ku ktorej sa rola prideľuje</a:help>
+				</xsd:appinfo>
+			</xsd:annotation>
+	</xsd:element>
+	
+	<!-- identifikator pracovneho miesta, ak ma identita rovnaku hodnotu, rola sa automaticky priradi -->
+	<!-- pracovne miesto = professionID+organizationID -->
+	<xsd:element name="positionID" type="xsd:string" minOccurs="0" maxOccurs="1">
+		<xsd:annotation>
+			<xsd:appinfo>
+				<a:indexed>true</a:indexed>
+<!--				<a:displayName>Pracovné miesto</a:displayName> -->
+				<a:displayOrder>40060</a:displayOrder>
+				<a:help>Identifikátor pracovného miesta,ku ktorému sa rola prideľuje</a:help>
+				</xsd:appinfo>
+			</xsd:annotation>
+	</xsd:element>
+
+	<!-- názov systému -->
+	<xsd:element name="system" type="xsd:string" minOccurs="0" maxOccurs="1">
+		<xsd:annotation>
+			<xsd:appinfo>
+				<a:indexed>true</a:indexed>
+<!--				<a:displayName>Koncový systém</a:displayName> -->
+				<a:displayOrder>40100</a:displayOrder>
+				<a:help>Názov koncového systému do ktorého sa rola propaguje</a:help>
+				</xsd:appinfo>
+			</xsd:annotation>
+	</xsd:element>
+	
+	<!-- kategoria systému (1.logicka uroven clenenia roli v katalogu roli)-->
+	<xsd:element name="category" type="xsd:string" minOccurs="0" maxOccurs="1">
+		<xsd:annotation>
+			<xsd:appinfo>
+				<a:indexed>true</a:indexed>
+<!--				<a:displayName>Kategória role</a:displayName> -->
+				<a:displayOrder>40200</a:displayOrder>
+				<a:help>Názov aplikácie: Názov OJ v katalógu rolí (1.úroveň)</a:help>
+			</xsd:appinfo>
+		</xsd:annotation>
+	</xsd:element>
+	
+	<!-- názov modulu (2.logicka uroven clenenia roli v katalogu roli)-->	
+	<xsd:element name="module" type="xsd:string" minOccurs="0" maxOccurs="1">
+		<xsd:annotation>
+			<xsd:appinfo>
+				<a:indexed>true</a:indexed>
+<!--				<a:displayName>Modul</a:displayName> -->
+				<a:displayOrder>40300</a:displayOrder>
+				<a:help>Názov modudlu aplikácie: Názov OJ v katalógu rolí (2.úroveň)</a:help>
+			</xsd:appinfo>
+		</xsd:annotation>
+	</xsd:element>
+	
+	<!-- názov opravnenia (biznis popis, tvori sucast nazvu role) -->	
+	<xsd:element name="access" type="xsd:string" minOccurs="0" maxOccurs="1">
+		<xsd:annotation>
+			<xsd:appinfo>
+				<a:indexed>true</a:indexed>
+<!--				<a:displayName>Názov prístupového oprávnenia</a:displayName> -->
+				<a:displayOrder>40400</a:displayOrder>
+				<a:help>Biznis názov prístupového oprávnenia na koncovom systéme</a:help>
+				</xsd:appinfo>
+			</xsd:annotation>
+	</xsd:element>
+	
+	<!-- priznak pre schvalenie IT Security -->	
+	<xsd:element name="securityApproval" type="xsd:boolean" minOccurs="0" maxOccurs="1">
+		<xsd:annotation>
+			<xsd:appinfo>
+				<a:indexed>true</a:indexed>
+<!--				<a:displayName>Schválenie bezpečnostným manažerom</a:displayName> -->
+				<a:displayOrder>40500</a:displayOrder>
+				<a:help>Schválenie bezpečnostným manažerom</a:help>
+			</xsd:appinfo>
+		</xsd:annotation>
+	</xsd:element>
+	
+	<!-- identifikátor role v konflikte -->	
+	<xsd:element name="sodRole" type="xsd:string" minOccurs="0" maxOccurs="unbounded">
+		<xsd:annotation>
+			<xsd:appinfo>
+				<a:indexed>true</a:indexed>
+<!--				<a:displayName>SOD rola</a:displayName> -->
+				<a:displayOrder>40600</a:displayOrder>
+				<a:help>Identifikátor konfliktnej role</a:help>
+			</xsd:appinfo>
+		</xsd:annotation>
+	</xsd:element>
+
+	</xsd:sequence>
+	</xsd:complexType>	
+</xsd:schema>

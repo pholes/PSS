@@ -1,0 +1,56 @@
+<org xmlns="http://midpoint.evolveum.com/xml/ns/public/common/common-3"
+     xmlns:q="http://prism.evolveum.com/xml/ns/public/query-3"
+     xmlns:c="http://midpoint.evolveum.com/xml/ns/public/common/common-3"
+     xmlns:t="http://prism.evolveum.com/xml/ns/public/types-3"
+     xmlns:org="http://midpoint.evolveum.com/xml/ns/public/common/org-3"
+     xmlns:icfs="http://midpoint.evolveum.com/xml/ns/public/connector/icf-1/resource-schema-3"
+     xmlns:ri="http://midpoint.evolveum.com/xml/ns/public/resource/instance-3"
+     oid="dc22bba0-b262-4b59-abc6-5d09e6bfb135"
+     version="2">
+   <name>OUT</name>
+   <parentOrgRef oid="a3a2704e-5bce-4a1c-8b2b-618da725b27f"
+                 relation="org:default"
+                 type="c:OrgType"><!-- STATUS --></parentOrgRef>   
+   <tenantRef oid="a3a2704e-5bce-4a1c-8b2b-618da725b27f"
+              relation="org:default"
+              type="c:OrgType"><!-- STATUS --></tenantRef>
+
+   <assignment>
+      <metadata>
+         <requestTimestamp>2018-03-08T12:01:38.942Z</requestTimestamp>
+         <requestorRef oid="00000000-0000-0000-0000-000000000002"
+                       relation="org:default"
+                       type="c:UserType"><!-- administrator --></requestorRef>
+         <createTimestamp>2018-03-08T12:01:38.971Z</createTimestamp>
+         <creatorRef oid="00000000-0000-0000-0000-000000000002"
+                     relation="org:default"
+                     type="c:UserType"><!-- administrator --></creatorRef>
+         <createChannel>http://midpoint.evolveum.com/xml/ns/public/gui/channels-3#user</createChannel>
+      </metadata>
+      <targetRef oid="a3a2704e-5bce-4a1c-8b2b-618da725b27f"
+                 relation="org:default"
+                 type="c:OrgType"><!-- STATUS --></targetRef>
+      <activation>
+         <effectiveStatus>enabled</effectiveStatus>
+      </activation>
+   </assignment>
+   
+   <activation>
+      <administrativeStatus>enabled</administrativeStatus>
+      <effectiveStatus>enabled</effectiveStatus>
+      <validFrom>2018-03-08T12:01:38.955Z</validFrom>
+      <validityStatus>in</validityStatus>
+      <enableTimestamp>2018-03-08T12:01:38.947Z</enableTimestamp>
+      <validityChangeTimestamp>2018-03-08T12:01:39.006Z</validityChangeTimestamp>
+   </activation>
+   <iteration>0</iteration>
+   <iterationToken/>
+   <roleMembershipRef oid="a3a2704e-5bce-4a1c-8b2b-618da725b27f"
+                      relation="org:default"
+                      type="c:OrgType"><!-- STATUS --></roleMembershipRef>
+   <displayName>Odchody</displayName>
+   <identifier>OUT</identifier>
+   <requestable>false</requestable>
+   <orgType>OTHER</orgType>
+   <tenant>false</tenant>
+</org>

@@ -1,0 +1,45 @@
+<lookupTable xmlns="http://midpoint.evolveum.com/xml/ns/public/common/common-3"
+             xmlns:q="http://prism.evolveum.com/xml/ns/public/query-3"
+             xmlns:c="http://midpoint.evolveum.com/xml/ns/public/common/common-3"
+             xmlns:t="http://prism.evolveum.com/xml/ns/public/types-3"
+             xmlns:icfs="http://midpoint.evolveum.com/xml/ns/public/connector/icf-1/resource-schema-3"
+             xmlns:ri="http://midpoint.evolveum.com/xml/ns/public/resource/instance-3"
+             oid="feed0000-0000-0000-0001-000000000004">
+   <name>Role Type</name>
+   <row>
+      <key></key>
+      <label>(nevyplnené)</label>
+   </row>
+   <row>
+      <key>APP</key>
+      <label>Aplikačná rola</label>      
+   </row>
+   <row>
+      <key>ITR</key>
+      <label>Technická rola</label>      
+   </row>
+   <row>
+      <key>LOC</key>
+      <label>Lokačná rola</label>      
+   </row>
+   <row>
+      <key>BIZ</key>
+      <label>Biznis rola</label>      
+   </row>
+   <row>
+      <key>POS</key>
+      <label>Pracovná pozícia</label>      
+   </row>   
+   <row>
+      <key>COM</key>
+      <label>Fiktívna rola</label>      
+   </row>
+   <row>
+      <key>SYSTEM</key>
+      <label>Organizačná rola</label>
+   </row>       
+   <row>
+      <key>METAROLE</key>
+      <label>Meta rola</label>
+   </row>   
+</lookupTable>

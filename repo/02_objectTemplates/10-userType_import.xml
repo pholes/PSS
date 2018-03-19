@@ -1,0 +1,629 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objectTemplate 
+                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                xmlns="http://midpoint.evolveum.com/xml/ns/public/common/common-3"
+                xmlns:c="http://midpoint.evolveum.com/xml/ns/public/common/common-3"
+                xmlns:t="http://prism.evolveum.com/xml/ns/public/types-3"
+                xmlns:org="http://midpoint.evolveum.com/xml/ns/public/common/org-3"
+                xmlns:q="http://prism.evolveum.com/xml/ns/public/query-3"                
+                oid="feed0000-0000-0SAP-00HR-PSS888888110" >
+    <name>Identity Import Template</name>    
+    
+    <!-- iteration -->
+    <iteration>
+      <maxIterations>20</maxIterations>
+      <tokenExpression>
+         <script>
+            <code>
+                    if (iteration == 0) {
+                        return "";
+                    } else {
+                        return "" + (iteration + 1);
+                    }
+                </code>
+         </script>
+      </tokenExpression>
+   </iteration>
+   
+   <!-- binding lookupTable to attributes -->   
+   <item>
+      <c:ref>employeeType</c:ref>
+      <limitations>
+         <minOccurs>1</minOccurs>
+         <maxOccurs>1</maxOccurs>
+      </limitations>
+      <valueEnumerationRef oid="feed0000-0000-0000-0001-000000000002"/>      
+   </item>
+   
+   <item>
+      <c:ref>extension/evidentiaryStatus</c:ref>      
+      <limitations>
+         <minOccurs>1</minOccurs>
+         <maxOccurs>1</maxOccurs>
+      </limitations>      
+      <valueEnumerationRef oid="feed0000-0000-0000-0001-000000000001"/>
+   </item>
+   
+   <!-- setting attributes as single-value -->
+   <item>
+      <c:ref>employeeNumber</c:ref>
+      <limitations>
+         <minOccurs>1</minOccurs>
+         <maxOccurs>1</maxOccurs>
+      </limitations>
+   </item>
+   
+   <item>
+      <c:ref>givenName</c:ref>
+      <limitations>
+         <minOccurs>1</minOccurs>
+         <maxOccurs>1</maxOccurs>
+      </limitations>      
+   </item>
+   
+   <item>
+      <c:ref>familyName</c:ref>
+      <limitations>
+         <minOccurs>1</minOccurs>
+         <maxOccurs>1</maxOccurs>
+      </limitations>
+   </item>
+   
+   <!-- disable visibility of some attributes -->   
+   <item>
+      <c:ref>description</c:ref>
+      <limitations>
+         <layer>presentation</layer>
+         <access>
+            <read>false</read>
+            <add>false</add>
+            <modify>false</modify>
+         </access>
+      </limitations>
+   </item>
+       
+   <item>
+      <c:ref>locale</c:ref>
+      <limitations>
+         <layer>presentation</layer>
+         <access>
+            <read>false</read>
+            <add>false</add>
+            <modify>false</modify>
+         </access>
+      </limitations>
+   </item>
+   
+   <item>
+      <c:ref>timezone</c:ref>
+      <limitations>
+         <layer>presentation</layer>
+         <access>
+            <read>false</read>
+            <add>false</add>
+            <modify>false</modify>
+         </access>
+      </limitations>
+   </item>
+   
+   <item>
+      <c:ref>jpegPhoto</c:ref>
+      <limitations>
+         <layer>presentation</layer>
+         <access>
+            <read>false</read>
+            <add>false</add>
+            <modify>false</modify>
+         </access>
+      </limitations>
+   </item>
+   
+   <item>
+      <c:ref>locality</c:ref>
+      <limitations>
+         <layer>presentation</layer>
+         <access>
+            <read>false</read>
+            <add>false</add>
+            <modify>false</modify>
+         </access>
+      </limitations>
+   </item>
+   
+   <!-- 
+   <item>
+      <c:ref>preferredLanguage</c:ref>
+      <limitations>
+         <layer>presentation</layer>
+         <access>
+            <read>false</read>
+            <add>false</add>
+            <modify>false</modify>
+         </access>
+      </limitations>
+   </item>
+   -->
+   
+   <item>
+      <c:ref>lifecycleState</c:ref>
+      <limitations>
+         <layer>presentation</layer>
+         <access>
+            <read>false</read>
+            <add>false</add>            
+         </access>
+      </limitations>
+   </item>
+   
+   <item>
+      <c:ref>policySituation</c:ref>
+      <limitations>
+         <layer>presentation</layer>
+         <access>
+            <read>false</read>
+            <add>false</add>            
+         </access>
+      </limitations>
+   </item>
+   
+   <item>
+      <c:ref>additionalName</c:ref>
+      <limitations>
+         <layer>presentation</layer>
+         <access>
+            <read>false</read>
+            <add>false</add>
+            <modify>false</modify>
+         </access>
+      </limitations>
+   </item>
+   
+   <item>
+      <c:ref>nickName</c:ref>
+      <limitations>
+         <layer>presentation</layer>
+         <access>
+            <read>false</read>
+            <add>false</add>
+            <modify>false</modify>
+         </access>
+      </limitations>
+   </item>
+   
+   <item>
+      <c:ref>title</c:ref>
+      <limitations>
+         <layer>presentation</layer>
+         <access>
+            <read>false</read>
+            <add>false</add>
+            <modify>false</modify>
+         </access>
+      </limitations>
+   </item>
+   
+	<item>
+      <c:ref>tenantRef</c:ref>
+      <limitations>
+         <layer>presentation</layer>
+         <access>
+            <read>false</read>
+            <add>false</add>
+            <modify>false</modify>
+         </access>
+      </limitations>
+   </item>
+   
+   	<item>
+      <c:ref>telephoneNumber</c:ref>
+      <limitations>
+         <layer>presentation</layer>
+         <access>
+            <read>false</read>
+            <add>false</add>
+            <modify>false</modify>
+         </access>
+      </limitations>
+   </item>
+   
+	<item>
+      <c:ref>adminGuiConfiguration</c:ref>
+      <limitations>
+         <layer>presentation</layer>
+         <access>
+            <read>false</read>
+            <add>false</add>
+            <modify>false</modify>
+         </access>
+      </limitations>
+   </item>
+          
+   <!-- generate NAME 
+   atribut sluzi ako uzivatelske meno do vsetkych aplikacii v ramci PSS (USERNAME)
+   hodnota atributu sa po celu dobu existencie identity nemeni
+   hodnota sa generuje pri nastupe a je unikatna.
+   
+   Konvencia pre Zamestnancov
+	4 znakov z priezviska
+	Osobne číslo (4 čísla)
+   
+   Konvencia pre Brigádnikov
+	X – konštanta
+	5 znakov z priezviska
+	1 znak z mena
+   
+   Konvencia pre Dodavatelov
+
+	3 prve pismeno nazvu spolocnosti 
+	5 pismen priezviska
+	1 prve pismeno mena (alimrkvij)
+   
+   
+   ? co v pripade Brigadnikov, ak vygenerujem rovnaky username? 
+   asi by sme mali pridat cislo? alebo dalsi znak z mena? 
+   -->      
+   <item>
+      <c:ref>name</c:ref>
+      <mapping>
+         <name>Generate Name</name>
+         <!-- <trace>true</trace> -->
+         <strength>strong</strength>
+         <source>
+            <c:path>$user/employeeNumber</c:path>
+         </source>
+         <source>
+            <c:path>$user/familyName</c:path>
+         </source>
+         <source>
+            <c:path>$user/givenName</c:path>
+         </source>
+         <source>
+            <c:path>$user/employeeType</c:path>
+         </source>
+          <source>
+            <c:path>$user/activation/administrativeStatus</c:path>
+         </source>
+         <source>
+            <c:path>$user/extension/company</c:path>
+         </source>
+         <expression>
+            <script>
+               <relativityMode>relative</relativityMode>
+               <code> 
+               import com.evolveum.midpoint.xml.ns._public.common.common_3.*;
+               import java.util.*; 
+               import java.io.*; 
+                        
+               pomGivenName = basic.norm(basic.stringify(givenName));
+	           pomFamilyName = basic.norm(basic.stringify(familyName)).split(" ")[0];	                
+	           tmpEmployeeNum = employeeNumber.substring(4,8);
+	           
+	           log.debug ("### -objTemp:Generate Name ### pomGivenName={},pomFamilyName={},tmpEmployeeNum={}",pomGivenName,pomFamilyName,tmpEmployeeNum);
+	           	           
+	           //generate midpoint username for Full Time Employee (FTE)	                 
+	           if (employeeType !=null &amp;&amp; employeeType =='FTE') {	                	
+	           		log.debug("### -objTemp:Generate Name ### pomFamilyName={},tmpEmployeeNum={}, iteracia={}", pomFamilyName, tmpEmployeeNum, iteration);			      		
+			      	if (pomFamilyName.length() &gt;3) {
+			      		tmpFamilyName=pomFamilyName.substring(0,4);
+			      		}
+			      	else {
+			      		tmpFamilyName= '0' + pomFamilyName; 
+			      		}			      		
+			      	loginName = tmpFamilyName.toUpperCase() + tmpEmployeeNum;		      		      					      		
+			      	log.info("### loginName: {}",loginName);
+			      	//check uniqueness
+			      	boolean unique = midpoint.isUniquePropertyValue(user, "name", loginName)
+	                if (!unique){
+	                	iteration=iteration+1
+	                	log.debug("### -objTemp:Generate Name ### -importObjTemp (FTE): iteration={}, loginName={}, unique={}", iteration, , loginName, unique);
+	                }
+	                else {
+	                	log.debug("### -objTemp:Generate Name ### -importObjTemp (FTE): loginName={}, kontrola na unique={}", loginName, unique);
+	                	return loginName.toLowerCase();	                				
+	                }	                
+				}	                
+	            //generate midpoint username for Temporary Employee (TE)
+	            	if (employeeType !=null &amp;&amp; employeeType == 'TE') {
+	                	
+	                tmpGivenName=pomGivenName.substring(0,1);
+	                log.debug("### -objTemp:Generate Name ### tmpGivenName={},pomFamilyName={}, iteracia={}", tmpGivenName, pomFamilyName, iteration);			      		
+			      		
+			      	if (pomFamilyName.length() &gt;=5) {
+			      		tmpFamilyName= pomFamilyName.substring(0,5);
+			      	}
+			      	if (pomFamilyName.length() == 4) {
+			      			tmpFamilyName=pomFamilyName.substring(0,4);
+			      			}
+			      	if (pomFamilyName.length() == 3) {
+			      		tmpFamilyName='0' + pomFamilyName;
+					}			    			      		
+					log.debug("### -objTemp:Generate Name ### loginName=X{}{}, iteracia={}", tmpGivenName, tmpFamilyName, iteration);
+			    	loginName = 'X' + tmpGivenName + tmpFamilyName;			      					      		
+			      		
+			      	//kontrola unikatnosti
+			      	boolean unique = midpoint.isUniquePropertyValue(user, "name", loginName)
+	                if (!unique){
+	                	iteration=iteration+1
+	                	log.debug("### -objTemp:Generate Name ### iteration={}, loginName={}, unique={}", iteration, , loginName, unique);
+	                	}
+	                else {
+	                	log.debug("### -objTemp:Generate Name ### loginName={}, kontrola na unique={}", loginName, unique);
+	                	return loginName.toLowerCase();	                				
+	                }	                	
+				}
+								
+				//generate midpoint username for External Employee (EXT)
+	            	if (employeeType == null || employeeType == 'EXT') {            	
+	            	
+	            	//  3 prve pismeno nazvu spolocnosti
+	            	//	5 pismen priezviska
+	            	//	1 prve pismeno mena (alimrkvij)	            	
+	            	
+	            	tmpGivenName=pomGivenName.substring(0,1)
+	            	log.debug("### -objTemp:Generate Name ### tmpGivenName={},pomFamilyName={}, iteracia={}, company={}, employeeType={}", tmpGivenName, pomFamilyName, iteration,company, employeeType);
+	            	
+	            	if (company !=null &amp;&amp; company.length() &gt;=3) {
+	           			pomCompany = company.substring(0,3);
+	           			}
+	           		else {
+	           			pomCompany=company;
+	           			}
+	           		if (pomFamilyName.length() &gt;=5) {
+	           			tmpFamilyName=pomFamilyName.substring(0,5)
+	           			}
+	           		if (pomFamilyName.length() &lt;5) {
+	           			tmpFamilyName=pomFamilyName;
+	           			}
+	           		log.debug("### -objTemp:Generate Name ### loginName={}{}{}, iteracia={}", pomCompany, tmpGivenName, tmpFamilyName, iteration);
+			    	loginName = pomCompany + tmpGivenName + tmpFamilyName;		      					      			
+	           		
+	           		//kontrola unikatnosti
+			      	boolean unique = midpoint.isUniquePropertyValue(user, "name", loginName)
+	                if (!unique){
+	                	iteration=iteration+1
+	                	log.debug("### -objTemp:Generate Name ### iteration={}, loginName={}, unique={}", iteration, , loginName, unique);
+	                	}
+	                else {
+	                	log.debug("### -objTemp:Generate Name ### loginName={}, kontrola na unique={}", loginName, unique);
+	                	return loginName.toLowerCase();	                				
+	                	}	                	
+					}           			                
+      			</code>
+            </script>
+         </expression>
+         <condition>
+            <script>
+               <code>
+               "add".equals(operation) &amp;&amp; 
+               givenName != null &amp;&amp; 
+               familyName != null &amp;&amp; 
+               employeeNumber != null &amp;&amp; 
+               !com.evolveum.midpoint.xml.ns._public.common.common_3.ActivationStatusType.DISABLED.equals(administrativeStatus)&amp;&amp;
+               !com.evolveum.midpoint.xml.ns._public.common.common_3.ActivationStatusType.ARCHIVED.equals(administrativeStatus)
+               </code>
+            </script>
+         </condition>
+      </mapping>
+   </item>   
+   
+   <!-- generate emailAddress 
+   Formát: name@pss.sk   
+   --> 
+   <item>
+      <c:ref>emailAddress</c:ref>
+      <mapping>
+         <name>Generate emailAddress</name>
+         <strength>weak</strength>         
+         <source>
+            <c:path>$user/name</c:path>
+         </source>         
+         <source>
+            <c:path>$user/employeeType</c:path>
+         </source>
+         <source>
+            <c:path>$user/activation/administrativeStatus</c:path>
+         </source>
+         <expression>
+            <script>
+               <code>          	               	
+               	return name.toString().toLowerCase() + '@pss.sk';               	               		 							 
+	           </code>
+            </script>
+         </expression>
+         <condition>
+            <script>
+               <code>   
+               "add".equals(operation) &amp;&amp;
+               name !=null &amp;&amp;
+               (employeeType == 'FTE' || employeeType == 'TE')&amp;&amp;               
+               !com.evolveum.midpoint.xml.ns._public.common.common_3.ActivationStatusType.DISABLED.equals(administrativeStatus)&amp;&amp;
+               !com.evolveum.midpoint.xml.ns._public.common.common_3.ActivationStatusType.ARCHIVED.equals(administrativeStatus)</code>
+            </script>
+         </condition>
+      </mapping>
+   </item>
+   
+   <!-- generate VOKonto   
+   Zamestnanec PSS – generované číslo, max 7znakov
+	formát: 888xxxx
+	888 – konštanta
+	xxxx - osobné číslo
+
+	Externista – generované číslo, max 7 znakov
+	formát: 99xxxxx
+	99 – konštanta
+	xxxxx – generované číslo zo sekvencie.
+   --> 
+   <item>
+      <c:ref>$user/extension/voKonto</c:ref>
+      <mapping>
+         <name>Generate IBP identifier (VOKONTO) for FTE/TE and EXT</name>
+         <strength>weak</strength>         
+         <source>
+            <c:path>$user/employeeNumber</c:path>
+         </source>
+         <source>
+            <c:path>$user/employeeType</c:path>
+         </source>          
+         <source>
+            <c:path>$user/activation/administrativeStatus</c:path>
+         </source>
+         <expression>
+            <script>
+               <code>
+				import com.evolveum.midpoint.xml.ns._public.common.common_3.*;
+               	import java.util.*; 
+               	
+				//generate IBP identifier for Full Time and Temporary Employee (FTE/TE)	                 
+				if (employeeType =='FTE' || employeeType =='TE') {	           		
+			        tmpEmployeeNum = employeeNumber.substring(4,8);
+				    voKonto = '888' + tmpEmployeeNum;			      		
+				    log.debug("### voKontoFTE: {}",voKonto);			      	              
+					}
+			   
+			   //generate IBP identifier for External Employee (EXT)
+				if (employeeType =='EXT') {	           		
+			        tmpEmployeeNum = employeeNumber.substring(3,8);
+				    voKonto = '99' + tmpEmployeeNum;		      		
+				    log.debug("### voKontoEXT: {}",voKonto);			      	              
+					}				
+				return voKonto;          	         	               	
+	           </code>
+            </script>
+         </expression>
+         <condition>
+            <script>
+               <code>   
+               "add".equals(operation) &amp;&amp;
+               employeeNumber !=null &amp;&amp;
+               (employeeType == 'FTE' || employeeType == 'TE' || employeeType == 'EXT') &amp;&amp;
+               !com.evolveum.midpoint.xml.ns._public.common.common_3.ActivationStatusType.DISABLED.equals(administrativeStatus)&amp;&amp;
+               !com.evolveum.midpoint.xml.ns._public.common.common_3.ActivationStatusType.ARCHIVED.equals(administrativeStatus)               
+               </code>
+            </script>
+         </condition>
+      </mapping>
+   </item>
+   
+   <!-- generate fullName -->   
+   <item>
+      <c:ref>fullName</c:ref>
+      <mapping>
+         <name>Generate fullname, include honorificTitles</name>
+         <strength>normal</strength>
+         <!-- <authoritative>true</authoritative>-->
+         <source>
+            <c:path>$focus/honorificPrefix</c:path>
+         </source>
+         <source>
+            <c:path>$focus/honorificSuffix</c:path>
+         </source>
+         <source>
+            <c:path>$focus/givenName</c:path>
+         </source>
+         <source>
+            <c:path>$focus/familyName</c:path>
+         </source>
+         <source>
+            <c:path>$user/activation/administrativeStatus</c:path>
+         </source>
+         <expression>
+            <script>
+               <code>
+               import com.evolveum.midpoint.xml.ns._public.common.common_3.*;
+               import java.util.*;               
+               
+               tmpFamilyName= familyName.toString().toLowerCase().capitalize();
+               tmpGivenName= givenName.toString().capitalize();               
+               log.debug('### -objTemp: Generate fullname ### tmpGivenName={}, tmpFamilyName={}',tmpGivenName,tmpFamilyName);
+               
+               //both academic titles				
+				if (honorificPrefix !=null &amp;&amp; honorificSuffix !=null) {					
+					tmpFullName = honorificPrefix +' '+tmpFamilyName + ' ' + tmpGivenName + ', '+honorificSuffix;					
+				}
+				//only academic prefix
+				else if (honorificPrefix !=null &amp;&amp; honorificSuffix == null) {
+					tmpFullName = honorificPrefix + ' ' + tmpFamilyName + ' ' + tmpGivenName;					
+				}
+				// without academic titles
+				else {
+					tmpFullName = tmpFamilyName + ' ' + tmpGivenName;					
+				}								 
+				log.debug('### fullname: {}',tmpFullName);				
+				return tmpFullName;
+	           </code>
+            </script>
+         </expression>
+         <condition>
+            <script>
+               <code>   
+               familyName !=null &amp;&amp;
+               givenName!=null &amp;&amp;
+               !com.evolveum.midpoint.xml.ns._public.common.common_3.ActivationStatusType.DISABLED.equals(administrativeStatus)&amp;&amp;
+               !com.evolveum.midpoint.xml.ns._public.common.common_3.ActivationStatusType.ARCHIVED.equals(administrativeStatus)               
+               </code>
+            </script>
+         </condition>
+      </mapping>
+   </item>    
+      
+   
+   <!-- Priradenie do paralelnej organizacnej struktury -->      
+   <mapping>
+      <name>Priradenie do paralelnej OS, na základe HRStatus</name>      
+      <strength>strong</strength>
+      <source>
+         <name>evidentiaryStatus</name>
+         <c:path>extension/evidentiaryStatus</c:path>
+      </source>
+      <expression>
+         <assignmentTargetSearch>
+            <targetType>c:OrgType</targetType>
+            <filter>
+               <q:equal>
+                  <q:path>c:identifier</q:path>
+                  <expression>
+                     <path>$evidentiaryStatus</path>
+                  </expression>
+               </q:equal>
+            </filter>
+         </assignmentTargetSearch>
+      </expression>
+      <target>
+         <c:path>assignment</c:path>
+      </target>
+      <condition>
+         <script>
+            <code>           		
+            	evidentiaryStatus !=null
+           	</code>
+         </script>
+      </condition>
+   </mapping>   
+   
+   <!-- Generate default password based on password policy -->
+   <mapping>
+      <name>Vygenerovanie inicialneho hesla</name>
+      <strength>weak</strength>
+      <source>
+            <c:path>$user/activation/administrativeStatus</c:path>
+         </source>
+      <expression>
+         <generate>
+            <valuePolicyRef oid="00000000-0000-0000-0000-000000000003"/>
+         </generate>
+      </expression>
+      <target>
+         <c:path>credentials/password/value</c:path>
+      </target>
+      <condition>
+         <script>
+            <code>"add".equals(operation)&amp;&amp;
+            !com.evolveum.midpoint.xml.ns._public.common.common_3.ActivationStatusType.DISABLED.equals(administrativeStatus)&amp;&amp;
+            !com.evolveum.midpoint.xml.ns._public.common.common_3.ActivationStatusType.ARCHIVED.equals(administrativeStatus)
+            </code>
+         </script>
+      </condition>
+   </mapping>   
+   
+</objectTemplate>

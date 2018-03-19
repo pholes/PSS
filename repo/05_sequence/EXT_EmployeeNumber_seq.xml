@@ -1,0 +1,9 @@
+<sequence 	xmlns="http://midpoint.evolveum.com/xml/ns/public/common/common-3"
+			oid="feed0000-0000-0000-0SEQ-PSS555555100">
+    <name>External Employee Personal Number</name>
+    <counter>10000001</counter>
+    <maxUnusedValues>10</maxUnusedValues>
+    <!-- 
+    <maxCounter>9</maxCounter> 
+    -->    
+</sequence>

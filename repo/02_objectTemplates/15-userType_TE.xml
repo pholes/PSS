@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objectTemplate 
+                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                xmlns="http://midpoint.evolveum.com/xml/ns/public/common/common-3"
+                xmlns:c="http://midpoint.evolveum.com/xml/ns/public/common/common-3"
+                xmlns:t="http://prism.evolveum.com/xml/ns/public/types-3"
+                xmlns:org="http://midpoint.evolveum.com/xml/ns/public/common/org-3"
+                xmlns:q="http://prism.evolveum.com/xml/ns/public/query-3"                
+                oid="feed0000-0000-0SAP-00HR-PSS888888099" >
+    <name>Temporary Employee Template (TE)</name>    
+    
+    <!-- include import template -->        
+    <includeRef oid="feed0000-0000-0SAP-00HR-PSS888888110"/>
+    
+    <!-- iteration -->
+    <iteration>
+      <maxIterations>20</maxIterations>
+      <tokenExpression>
+         <script>
+            <code>
+                    if (iteration == 0) {
+                        return "";
+                    } else {
+                        return "" + (iteration + 1);
+                    }
+                </code>
+         </script>
+      </tokenExpression>
+   </iteration>

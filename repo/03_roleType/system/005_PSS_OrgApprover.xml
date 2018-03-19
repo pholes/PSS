@@ -1,0 +1,451 @@
+<role xmlns="http://midpoint.evolveum.com/xml/ns/public/common/common-3"
+      xmlns:q="http://prism.evolveum.com/xml/ns/public/query-3"
+      xmlns:c="http://midpoint.evolveum.com/xml/ns/public/common/common-3"
+      xmlns:t="http://prism.evolveum.com/xml/ns/public/types-3"
+      xmlns:org="http://midpoint.evolveum.com/xml/ns/public/common/org-3"
+      xmlns:icfs="http://midpoint.evolveum.com/xml/ns/public/connector/icf-1/resource-schema-3"
+      xmlns:ri="http://midpoint.evolveum.com/xml/ns/public/resource/instance-3"
+      oid="00000000-feed-0000-0003-PSS000000005">
+   <name>Scvhalovatel utvaru</name>
+   <displayName>PSS Vlastník útvaru - Schvalovateľ</displayName>
+   <description>Extended: Role authorizing users to make approval decisions on work items.</description>
+   <iteration>0</iteration>
+   <iterationToken/>
+   <!--   
+   <authorization id="1">
+      <name>gui-approver-access</name>
+      <description>
+    		Allow access to list of work items in GUI. Allow access to pages that show object details,
+    		so the approver may examine who is requesting and what is requesting.
+    	</description>
+      <action>http://midpoint.evolveum.com/xml/ns/public/security/authorization-ui-3#workItem</action>
+      <action>http://midpoint.evolveum.com/xml/ns/public/security/authorization-ui-3#myWorkItems</action>
+      <action>http://midpoint.evolveum.com/xml/ns/public/security/authorization-ui-3#claimableWorkItems</action>
+      <action>http://midpoint.evolveum.com/xml/ns/public/security/authorization-ui-3#userDetails</action>
+      <action>http://midpoint.evolveum.com/xml/ns/public/security/authorization-ui-3#roleDetails</action>
+      <action>http://midpoint.evolveum.com/xml/ns/public/security/authorization-ui-3#orgUnit</action>
+      <action>http://midpoint.evolveum.com/xml/ns/public/security/authorization-ui-3#service</action>
+   </authorization>
+   <authorization id="2">
+      <name>tasks-read</name>
+      <description>
+            Allow to see the requester of the operation that is being approved and the current delta.
+            In order for the approver to see other properties (e.g. history of the approvals) please allow read access
+            to other items as well, e.g. to the whole workflowContext.
+        </description>
+      <action>http://midpoint.evolveum.com/xml/ns/public/security/authorization-model-3#read</action>
+      <object>
+         <type>TaskType</type>
+      </object>
+      <c:item>workflowContext/requesterRef</c:item>
+      <c:item>workflowContext/processorSpecificState</c:item>
+   </authorization>
+   <authorization id="3">
+      <name>users-read</name>
+      <description>
+    		Allow to read basic user properties to be able to display requestor details in the
+    		approval forms.
+    	</description>
+      <action>http://midpoint.evolveum.com/xml/ns/public/security/authorization-model-3#read</action>
+      <object>
+         <type>UserType</type>
+      </object>
+      <c:item>name</c:item>
+      <c:item>givenName</c:item>
+      <c:item>familyName</c:item>
+      <c:item>fullName</c:item>
+      <c:item>employeeType</c:item>
+      <c:item>employeeNumber</c:item>
+   </authorization>
+   <authorization id="4">
+      <name>roles-read</name>
+      <description>
+    		Allow to read basic role properties to be able to display details of the requested role.
+    	</description>
+      <action>http://midpoint.evolveum.com/xml/ns/public/security/authorization-model-3#read</action>
+      <object>
+         <type>RoleType</type>
+      </object>
+      <c:item>name</c:item>
+      <c:item>displayName</c:item>
+      <c:item>identifier</c:item>
+      <c:item>description</c:item>
+      <c:item>riskLevel</c:item>
+      <c:item>roleType</c:item>
+   </authorization>
+   <authorization id="5">
+      <name>orgs-read</name>
+      <description>
+    		Allow to read basic org properties to be able to display details of the requested org.
+    	</description>
+      <action>http://midpoint.evolveum.com/xml/ns/public/security/authorization-model-3#read</action>
+      <object>
+         <type>RoleType</type>
+      </object>
+      <c:item>name</c:item>
+      <c:item>displayName</c:item>
+      <c:item>identifier</c:item>
+      <c:item>description</c:item>
+      <c:item>riskLevel</c:item>
+      <c:item>orgType</c:item>
+   </authorization>
+   <authorization id="6">
+      <name>services-read</name>
+      <description>
+    		Allow to read basic service properties to be able to display details of the requested service.
+    	</description>
+      <action>http://midpoint.evolveum.com/xml/ns/public/security/authorization-model-3#read</action>
+      <object>
+         <type>ServiceType</type>
+      </object>
+      <c:item>name</c:item>
+      <c:item>displayName</c:item>
+      <c:item>identifier</c:item>
+      <c:item>description</c:item>
+      <c:item>riskLevel</c:item>
+      <c:item>serviceType</c:item>
+   </authorization>   
+-->   
+   
+   
+   <authorization>
+    	<name>gui</name>    	
+    	<action>http://midpoint.evolveum.com/xml/ns/public/security/authorization-ui-3#users</action>
+    </authorization>
+    
+    <authorization>
+    	<name>autz-read</name>
+    	<action>http://midpoint.evolveum.com/xml/ns/public/security/authorization-model-3#read</action>
+    	<object>
+    		<type>UserType</type>
+    		<orgRelation>
+    			<subjectRelation>org:manager</subjectRelation>
+    			<scope>allDescendants</scope>
+    			<includeReferenceOrg>true</includeReferenceOrg>
+    		</orgRelation>
+    	</object>
+		<!--    
+		<item>roleMembershipRef</item>
+    	<item>parentOrgRef</item>
+    	-->    	
+    	<item>targetRef</item>
+    	<item>assignment</item>
+    	<item>assignment/targetRef</item>
+    	<item>assignment/targetRef/description</item>
+    	<item>assignment/activation/effectiveStatus</item>
+    </authorization>	
+    	<!-- 
+    	<item>assignment/metadata/requestTimestamp</item>
+    	<item>assignment/metadata/requestorRef</item>
+		<item>assignment/metadata/createTimestamp</item>
+		<item>assignment/metadata/creatorRef</item>
+		<item>assignment/metadata/createChannel</item>
+		<item>assignment/metadata/originMappingName</item>
+		<item>assignment/targetRef</item>
+    	<item>assignment/activation/effectiveStatus</item>
+    	-->   	
+    
+        
+    <!-- 
+    <authorization>
+    	<name>autz-write</name>
+    	<action>http://midpoint.evolveum.com/xml/ns/public/security/authorization-model-3#modify</action>
+    	<action>http://midpoint.evolveum.com/xml/ns/public/security/authorization-model-3#add</action>
+    	<action>http://midpoint.evolveum.com/xml/ns/public/security/authorization-model-3#delete</action>
+    	<object>
+    		<orgRelation>
+    			<subjectRelation>org:manager</subjectRelation>
+    		</orgRelation>
+    	</object>
+    </authorization>
+    -->
+    
+    <!-- Extending: Enable assign roles to my sub-employee
+    
+    In SelfService enable:
+    - TargetUser:<username> to assign requestable roles
+    - Select Assignments source user
+     -->
+    <authorization>
+		<name>auth-assign, auth-unassign for sub-employee (allow -request)</name>
+		<description>Autorizacia umoznuje priradit/odobrat identite</description>
+		<action>http://midpoint.evolveum.com/xml/ns/public/security/authorization-model-3#assign</action>
+		<action>http://midpoint.evolveum.com/xml/ns/public/security/authorization-model-3#unassign</action>
+		<phase>request</phase>
+		<object>
+			<orgRelation>
+    			<subjectRelation>org:manager</subjectRelation>
+    		</orgRelation>
+         	<type>UserType</type>
+			<filter>
+	            <q:or>
+	               <q:equal>
+	                  <q:path>employeeType</q:path>
+	                  <q:value>FTE</q:value>
+	               </q:equal>
+	               <q:equal>
+	                  <q:path>employeeType</q:path>
+	                  <q:value>TE</q:value>
+	               </q:equal>
+	            </q:or>
+	         </filter>
+      </object>            
+   </authorization>
+    
+    <authorization>
+    	<name>autz-read</name>
+    	<action>http://midpoint.evolveum.com/xml/ns/public/security/authorization-model-3#read</action>
+    	<!-- 
+    	<action>http://midpoint.evolveum.com/xml/ns/public/security/authorization-model-3#modify</action>
+    	<action>http://midpoint.evolveum.com/xml/ns/public/security/authorization-model-3#add</action>
+    	<action>http://midpoint.evolveum.com/xml/ns/public/security/authorization-model-3#delete</action> 
+    	-->
+    	<object>
+    		<orgRelation>
+    			<subjectRelation>org:manager</subjectRelation>
+    		</orgRelation>
+    	</object>
+		<item>name</item>
+	    <item>fullName</item>
+	    <item>employeeNumber</item>   
+	    <item>employeeType</item>
+	    <item>emailAddress</item>
+	    <!-- 
+	    <item>extension/objectSID</item>
+	    <item>extension/evidentiaryStatus</item>
+	    <item>extension/jira</item>
+		<item>extension/comment</item>
+		<item>extension/organizationID</item>	
+		<item>extension/professionID</item>
+		<item>extension/costCenterID</item>
+		-->
+		<!-- Atributy pre OZ -->
+		<!-- 
+		<item>extension/managerID</item>
+		<item>extension/managerEmail</item>
+		<item>extension/regionalManager</item>
+		<item>extension/regionalManagerID</item>
+		<item>extension/regionalManagerEmail</item>
+		<item>extension/regionalIT</item>
+		<item>extension/nbsCertificate</item>
+		<item>extension/nbsCertificate2</item>
+		<item>extension/nbsCertificate3</item>
+		<item>extension/assetNumber</item>
+		-->		    
+		<item>organization</item>
+		<item>organizationalUnit</item>
+		<item>costCenter</item>
+		<item>extension/voKonto</item>
+		<item>extension/cardNumber</item>
+		<item>extension/givenFamilyName</item>
+		<item>extension/profession</item>		
+		<item>extension/ipTelNum</item>
+		<item>extension/manager</item>	
+		<item>extension/startDate</item>
+		<!-- ACTIVATION -->
+		<!-- 
+		<item>activation/validTo</item>		
+		<item>activation/validityStatus</item>
+		<item>activation/validityChangeTimestamp</item>			
+		<item>activation/lockoutExpirationTimestamp</item>		
+		<item>activation/lockoutStatus</item>
+		<item>activation/effectiveStatus</item>
+		<item>activation/enableTimestamp</item>
+		<item>activation/lockoutStatus</item>
+		-->		
+    </authorization>
+    
+    <authorization>
+    	<name>autz-write assignments</name>
+    	<action>http://midpoint.evolveum.com/xml/ns/public/security/authorization-model-3#modify</action>
+    	<!-- 
+    	<action>http://midpoint.evolveum.com/xml/ns/public/security/authorization-model-3#modify</action>
+    	<action>http://midpoint.evolveum.com/xml/ns/public/security/authorization-model-3#add</action>
+    	<action>http://midpoint.evolveum.com/xml/ns/public/security/authorization-model-3#delete</action> 
+    	-->
+    	<object>
+    		<orgRelation>
+    			<subjectRelation>org:manager</subjectRelation>
+    		</orgRelation>
+    	</object>
+    	<item>assignment</item>
+       	<item>parentOrgRef</item>
+      	<item>roleMembershipRef</item>
+    </authorization>
+    
+    
+    <authorization>
+    	<name>autz-shadow</name>
+    	<action>http://midpoint.evolveum.com/xml/ns/public/security/authorization-model-3#read</action>
+    	<action>http://midpoint.evolveum.com/xml/ns/public/security/authorization-model-3#modify</action>
+    	<action>http://midpoint.evolveum.com/xml/ns/public/security/authorization-model-3#add</action>
+    	<action>http://midpoint.evolveum.com/xml/ns/public/security/authorization-model-3#delete</action>
+    	<object>
+         	<type>TaskType</type>         
+      	</object>
+      	
+      	<object>
+         	<type>ServiceType</type>         	         
+      	</object>
+    	
+    	<object>
+    		<type>ShadowType</type>
+    		<owner>
+    			<orgRelation>
+	    			<subjectRelation>org:manager</subjectRelation>
+	    		</orgRelation>
+    		</owner>
+    	</object>
+    	<!-- 
+    	<item>assignment</item>
+    	<item>assignment/targetRef</item>   	
+    	-->
+    </authorization>
+    
+    <authorization>
+      <name>gui-approver-access</name>
+      <description>
+    		Allow access to list of work items in GUI. Allow access to pages that show object details,
+    		so the approver may examine who is requesting and what is requesting.
+    	</description>
+      <action>http://midpoint.evolveum.com/xml/ns/public/security/authorization-ui-3#workItem</action>
+      <action>http://midpoint.evolveum.com/xml/ns/public/security/authorization-ui-3#myWorkItems</action>
+      <action>http://midpoint.evolveum.com/xml/ns/public/security/authorization-ui-3#claimableWorkItems</action>
+      <action>http://midpoint.evolveum.com/xml/ns/public/security/authorization-ui-3#userDetails</action>
+      <action>http://midpoint.evolveum.com/xml/ns/public/security/authorization-ui-3#roleDetails</action>
+      <action>http://midpoint.evolveum.com/xml/ns/public/security/authorization-ui-3#orgUnit</action>
+      <action>http://midpoint.evolveum.com/xml/ns/public/security/authorization-ui-3#service</action>
+   </authorization>
+   
+   <authorization>
+      <name>tasks-read</name>
+      <description>
+            Allow to see the requester of the operation that is being approved and the current delta.
+            In order for the approver to see other properties (e.g. history of the approvals) please allow read access
+            to other items as well, e.g. to the whole workflowContext.
+        </description>
+      <action>http://midpoint.evolveum.com/xml/ns/public/security/authorization-model-3#read</action>
+      <object>
+         <type>TaskType</type>
+      </object>
+      <c:item>workflowContext/requesterRef</c:item>
+      <c:item>workflowContext/processorSpecificState</c:item>
+   </authorization>
+   
+   <!-- Extending: disallow visibility of 'administrator' && UserType:OZ -->
+   <authorization>
+      <name>users-read</name>
+      <description>
+    		Allow to read basic user properties to be able to display requestor details in the
+    		approval forms.
+    	</description>
+      <action>http://midpoint.evolveum.com/xml/ns/public/security/authorization-model-3#read</action>
+      <object>
+         <type>UserType</type>
+         <filter>
+            <q:and>
+               <q:equal>
+                  <q:path>employeeType</q:path>
+                  <q:value>EXT</q:value>
+               </q:equal>
+               <q:equal>
+                  <q:path>employeeType</q:path>
+                  <q:value>FTE</q:value>
+               </q:equal>
+               <q:equal>
+                  <q:path>employeeType</q:path>
+                  <q:value>TE</q:value>
+               </q:equal>
+               	<q:or>
+               	<q:not>
+	               <q:equal>
+					<q:path>employeeType</q:path>
+                  	<q:value>ADMIN</q:value>  <!-- administratorske ucty v midpoint -->
+	               </q:equal>	               
+               	</q:not>      
+               	<q:not>
+		           <q:equal>
+			       	 <q:path>employeeType</q:path>
+			         <q:value>OZ</q:value>	<!-- Obchodni zastupcovia (z IBP) -->
+		           </q:equal>
+				</q:not>
+				</q:or>         
+            </q:and>
+         </filter>
+      </object>
+      <!-- ak by sme chceli do schvalovania pridat viditelnost na viacero atributov tak sem -->
+      <c:item>name</c:item>
+      <c:item>givenName</c:item>
+      <c:item>familyName</c:item>
+      <c:item>fullName</c:item>
+      <c:item>employeeType</c:item>
+      <c:item>employeeNumber</c:item>
+      <!-- 
+      <item>parentOrgRef</item>
+      <item>roleMembershipRef</item>
+      <item>targetRef</item>
+	  <item>assignment</item>
+	  --> 
+   </authorization>
+   
+   <authorization>
+      <name>roles-read</name>
+      <description>
+    		Allow to read basic role properties to be able to display details of the requested role.
+    	</description>
+      <action>http://midpoint.evolveum.com/xml/ns/public/security/authorization-model-3#read</action>
+      <object>
+         <type>RoleType</type>
+      </object>
+      <c:item>name</c:item>
+      <c:item>displayName</c:item>      
+      <c:item>description</c:item>
+      <c:item>roleType</c:item>
+      <!-- 
+      <c:item>identifier</c:item>
+      <c:item>riskLevel</c:item>
+      
+      -->
+   </authorization>
+   
+   <authorization>
+      <name>orgs-read</name>
+      <description>
+    		Allow to read basic org properties to be able to display details of the requested org.
+    	</description>
+      <action>http://midpoint.evolveum.com/xml/ns/public/security/authorization-model-3#read</action>
+      <object>
+         <type>RoleType</type>
+      </object>
+      <c:item>name</c:item>
+      <c:item>displayName</c:item>      
+      <c:item>description</c:item>
+      <!-- 
+      <c:item>identifier</c:item>
+      <c:item>riskLevel</c:item>
+      <c:item>orgType</c:item>
+      -->
+   </authorization>
+   
+   <!-- not used -->
+   <authorization>
+      <name>services-read</name>
+      <description>
+    		Allow to read basic service properties to be able to display details of the requested service.
+    	</description>
+      <action>http://midpoint.evolveum.com/xml/ns/public/security/authorization-model-3#read</action>
+      <object>
+         <type>ServiceType</type>
+      </object>
+      <c:item>name</c:item>
+      <c:item>displayName</c:item>
+      <c:item>identifier</c:item>
+      <c:item>description</c:item>
+      <c:item>riskLevel</c:item>
+      <c:item>serviceType</c:item>
+   </authorization>
+   
+   <requestable>false</requestable>
+   <delegable>false</delegable>
+   <roleType>ORG</roleType>
+</role>

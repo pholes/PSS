@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objectTemplate 
+                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                xmlns="http://midpoint.evolveum.com/xml/ns/public/common/common-3"
+                xmlns:c="http://midpoint.evolveum.com/xml/ns/public/common/common-3"
+                xmlns:t="http://prism.evolveum.com/xml/ns/public/types-3"
+                xmlns:org="http://midpoint.evolveum.com/xml/ns/public/common/org-3"
+                xmlns:q="http://prism.evolveum.com/xml/ns/public/query-3"                
+                oid="feed0000-0000-0000-0000-PSS888888100" >
+
+    <name>RoleImport Template</name>
+  
+	 <!-- nastavenie default value requestable -->
+     <!-- <mapping>
+        <name>requestable</name>
+        <strength>weak</strength>        
+        <expression>
+            <value>false</value>
+        </expression>
+        <target>
+             <path>requestable</path>
+        </target>        
+     </mapping>   
+	-->
+	
+    <!-- _Technická metarola na priradenie do AD grupy -->	 
+	<!-- <mapping>
+        <name>Technical metarole assignment</name>
+        <strength>strong</strength>
+        <source>
+            <path>roleType</path>
+        </source>
+        <expression>
+            <value>    
+                <targetRef oid="feed0000-0000-0000-0003-000000000002" type="c:RoleType"/>
+            </value>
+        </expression>
+        <target>
+            <path>assignment</path>
+        </target>
+        <condition>
+            <script>
+                <code>roleType=='ITR' &amp;&amp; system=='AD'</code>
+            </script>
+        </condition>
+    </mapping>
+     -->
+    
+    <!-- _Technická metarola na priradenie do KWERIA meta-role-->
+	 
+	<mapping>
+        <name>Technical metarole assignment</name>
+        <strength>strong</strength>
+        <source>
+            <path>$focus/roleType</path>
+        </source>
+        <source>
+            <path>$focus/extension/system</path>
+        </source>        
+        <expression>
+            <value>    
+                <targetRef oid="11111111-2222-3333-4444-200000000001" type="c:RoleType"/>
+            </value>
+        </expression>
+        <target>
+            <path>assignment</path>
+        </target>
+        <condition>
+            <script>
+                <code>system=='CAS'</code>
+            </script>
+        </condition>
+    </mapping>     
+     
+    <!-- _Priradenie do Katalogu roli RIS -->    
+    
+    <mapping>
+      <name>Mapovanie role na RIS org.struct</name>
+      <authoritative>true</authoritative>
+      <strength>strong</strength>
+      <source>
+         <c:path>$focus/extension/module</c:path>
+      </source>
+      <expression>
+         <assignmentTargetSearch xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                                 xsi:type="c:SearchObjectRefExpressionEvaluatorType">
+            <targetType>c:OrgType</targetType>
+            <filter>
+               <q:equal>
+                  <q:path>name</q:path>
+                  <expression>
+                     <path>$module</path>
+                  </expression>
+               </q:equal>
+            </filter>
+            <createOnDemand>false</createOnDemand>
+            <populateObject>
+               <populateItem>
+                  <expression>
+                     <c:path xsi:type="t:ItemPathType">$module</c:path>
+                  </expression>
+                  <target>
+                     <c:path>name</c:path>
+                  </target>
+               </populateItem>
+               <populateItem>
+                  <expression>
+                     <value>OTHER</value>
+                  </expression>
+                  <target>
+                     <c:path>orgType</c:path>
+                  </target>
+               </populateItem>
+            </populateObject>
+         </assignmentTargetSearch>
+      </expression>
+      <target>
+         <c:path>assignment</c:path>
+      </target>
+   </mapping>  		
+	    	 
+</objectTemplate>

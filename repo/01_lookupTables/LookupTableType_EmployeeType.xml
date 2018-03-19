@@ -1,0 +1,30 @@
+<lookupTable xmlns="http://midpoint.evolveum.com/xml/ns/public/common/common-3"
+             xmlns:q="http://prism.evolveum.com/xml/ns/public/query-3"
+             xmlns:c="http://midpoint.evolveum.com/xml/ns/public/common/common-3"
+             xmlns:t="http://prism.evolveum.com/xml/ns/public/types-3"
+             xmlns:icfs="http://midpoint.evolveum.com/xml/ns/public/connector/icf-1/resource-schema-3"
+             xmlns:ri="http://midpoint.evolveum.com/xml/ns/public/resource/instance-3"
+             oid="feed0000-0000-0000-0001-000000000002"
+             version="19">
+   <name>Employee Type</name>
+   <row>
+      <key></key>
+      <label>(nevyplnené)</label>      
+   </row>
+   <row>
+      <key>FTE</key>
+      <label>Interný zamestnanec</label>      
+   </row>
+   <row>
+      <key>TE</key>
+      <label>Brigádnik</label>      
+   </row>
+   <row>
+      <key>OZ</key>
+      <label>Obchodný zástupca</label>      
+   </row>
+   <row>
+      <key>EXT</key>
+      <label>Dodávateľ</label>      
+   </row>
+</lookupTable>

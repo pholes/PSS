@@ -1,0 +1,1172 @@
+<resource xmlns="http://midpoint.evolveum.com/xml/ns/public/common/common-3"
+          xmlns:q="http://prism.evolveum.com/xml/ns/public/query-3"
+          xmlns:c="http://midpoint.evolveum.com/xml/ns/public/common/common-3"
+          xmlns:t="http://prism.evolveum.com/xml/ns/public/types-3"
+          xmlns:org="http://midpoint.evolveum.com/xml/ns/public/common/org-3"
+          xmlns:icfs="http://midpoint.evolveum.com/xml/ns/public/connector/icf-1/resource-schema-3"
+          xmlns:ri="http://midpoint.evolveum.com/xml/ns/public/resource/instance-3"
+          oid="70cb64f3-b3f6-4809-9f64-af391fff90de">
+   <name>SAP HR</name>
+   <description>Employee</description>   
+   <operationalState>
+      <lastAvailabilityStatus>up</lastAvailabilityStatus>
+   </operationalState>
+   <connectorRef oid="36c45ce9-8a2e-4c4f-87d0-d24c2646895d"
+                 relation="org:default"
+                 type="c:ConnectorType"/>
+   <connectorConfiguration xmlns:icfc="http://midpoint.evolveum.com/xml/ns/public/connector/icf-1/connector-schema-3">
+      <icfc:configurationProperties xmlns:gen621="http://midpoint.evolveum.com/xml/ns/public/connector/icf-1/bundle/com.evolveum.polygon.connector-csv/com.evolveum.polygon.connector.csv.CsvConnector">
+         <gen621:filePath>/var/opt/midpoint/import/pss_employees.csv</gen621:filePath>
+         <gen621:ignoreEmptyLines>true</gen621:ignoreEmptyLines>
+         <gen621:readOnly>true</gen621:readOnly>
+         <gen621:encoding>UTF8</gen621:encoding>
+         <gen621:fieldDelimiter>;</gen621:fieldDelimiter>
+         <gen621:ignoreSurroundingSpaces>true</gen621:ignoreSurroundingSpaces>
+         <gen621:trim>true</gen621:trim>
+         <gen621:headerExists>true</gen621:headerExists>
+         <gen621:recordSeparator>;</gen621:recordSeparator>
+         <gen621:uniqueAttribute>EmployeeNumber</gen621:uniqueAttribute>
+      </icfc:configurationProperties>
+   </connectorConfiguration>
+   <schema>
+      <cachingMetadata>
+         <retrievalTimestamp>2018-03-09T13:23:24.172Z</retrievalTimestamp>
+         <serialNumber>39e51d63d5c2082e-fc2cdbf7a53a6b2a</serialNumber>
+      </cachingMetadata>
+      <definition>
+         <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                     xmlns:a="http://prism.evolveum.com/xml/ns/public/annotation-3"
+                     xmlns:tns="http://midpoint.evolveum.com/xml/ns/public/resource/instance-3"
+                     xmlns:ra="http://midpoint.evolveum.com/xml/ns/public/resource/annotation-3"
+                     elementFormDefault="qualified"
+                     targetNamespace="http://midpoint.evolveum.com/xml/ns/public/resource/instance-3">
+            <xsd:import namespace="http://prism.evolveum.com/xml/ns/public/annotation-3"/>
+            <xsd:import namespace="http://midpoint.evolveum.com/xml/ns/public/resource/annotation-3"/>
+            <xsd:complexType name="AccountObjectClass">
+               <xsd:annotation>
+                  <xsd:appinfo>
+                     <ra:resourceObject/>
+                     <ra:identifier>ri:EmployeeNumber</ra:identifier>
+                     <ra:displayNameAttribute>ri:EmployeeNumber</ra:displayNameAttribute>
+                     <ra:namingAttribute>ri:EmployeeNumber</ra:namingAttribute>
+                     <ra:nativeObjectClass>__ACCOUNT__</ra:nativeObjectClass>
+                     <ra:kind>account</ra:kind>
+                     <ra:default>true</ra:default>
+                  </xsd:appinfo>
+               </xsd:annotation>
+               <xsd:sequence>
+                  <xsd:element minOccurs="0" name="StartDate" type="xsd:string">
+                     <xsd:annotation>
+                        <xsd:appinfo>
+                           <a:displayOrder>120</a:displayOrder>
+                           <ra:nativeAttributeName>StartDate</ra:nativeAttributeName>
+                           <ra:frameworkAttributeName>StartDate</ra:frameworkAttributeName>
+                        </xsd:appinfo>
+                     </xsd:annotation>
+                  </xsd:element>
+                  <xsd:element minOccurs="0" name="FirstName" type="xsd:string">
+                     <xsd:annotation>
+                        <xsd:appinfo>
+                           <a:displayOrder>130</a:displayOrder>
+                           <ra:nativeAttributeName>FirstName</ra:nativeAttributeName>
+                           <ra:frameworkAttributeName>FirstName</ra:frameworkAttributeName>
+                        </xsd:appinfo>
+                     </xsd:annotation>
+                  </xsd:element>
+                  <xsd:element minOccurs="0" name="CostCenter" type="xsd:string">
+                     <xsd:annotation>
+                        <xsd:appinfo>
+                           <a:displayOrder>140</a:displayOrder>
+                           <ra:nativeAttributeName>CostCenter</ra:nativeAttributeName>
+                           <ra:frameworkAttributeName>CostCenter</ra:frameworkAttributeName>
+                        </xsd:appinfo>
+                     </xsd:annotation>
+                  </xsd:element>
+                  <xsd:element minOccurs="0" name="OrganizationID" type="xsd:string">
+                     <xsd:annotation>
+                        <xsd:appinfo>
+                           <a:displayOrder>150</a:displayOrder>
+                           <ra:nativeAttributeName>OrganizationID</ra:nativeAttributeName>
+                           <ra:frameworkAttributeName>OrganizationID</ra:frameworkAttributeName>
+                        </xsd:appinfo>
+                     </xsd:annotation>
+                  </xsd:element>
+                  <xsd:element minOccurs="0" name="Organization" type="xsd:string">
+                     <xsd:annotation>
+                        <xsd:appinfo>
+                           <a:displayOrder>160</a:displayOrder>
+                           <ra:nativeAttributeName>Organization</ra:nativeAttributeName>
+                           <ra:frameworkAttributeName>Organization</ra:frameworkAttributeName>
+                        </xsd:appinfo>
+                     </xsd:annotation>
+                  </xsd:element>
+                  <xsd:element minOccurs="0" name="ProfessionID" type="xsd:string">
+                     <xsd:annotation>
+                        <xsd:appinfo>
+                           <a:displayOrder>170</a:displayOrder>
+                           <ra:nativeAttributeName>ProfessionID</ra:nativeAttributeName>
+                           <ra:frameworkAttributeName>ProfessionID</ra:frameworkAttributeName>
+                        </xsd:appinfo>
+                     </xsd:annotation>
+                  </xsd:element>
+                  <xsd:element minOccurs="0" name="CostCenterID" type="xsd:string">
+                     <xsd:annotation>
+                        <xsd:appinfo>
+                           <a:displayOrder>180</a:displayOrder>
+                           <ra:nativeAttributeName>CostCenterID</ra:nativeAttributeName>
+                           <ra:frameworkAttributeName>CostCenterID</ra:frameworkAttributeName>
+                        </xsd:appinfo>
+                     </xsd:annotation>
+                  </xsd:element>
+                  <xsd:element minOccurs="0" name="Status" type="xsd:string">
+                     <xsd:annotation>
+                        <xsd:appinfo>
+                           <a:displayOrder>190</a:displayOrder>
+                           <ra:nativeAttributeName>Status</ra:nativeAttributeName>
+                           <ra:frameworkAttributeName>Status</ra:frameworkAttributeName>
+                        </xsd:appinfo>
+                     </xsd:annotation>
+                  </xsd:element>
+                  <xsd:element minOccurs="0" name="LastName" type="xsd:string">
+                     <xsd:annotation>
+                        <xsd:appinfo>
+                           <a:displayOrder>200</a:displayOrder>
+                           <ra:nativeAttributeName>LastName</ra:nativeAttributeName>
+                           <ra:frameworkAttributeName>LastName</ra:frameworkAttributeName>
+                        </xsd:appinfo>
+                     </xsd:annotation>
+                  </xsd:element>
+                  <xsd:element minOccurs="0" name="Manager" type="xsd:string">
+                     <xsd:annotation>
+                        <xsd:appinfo>
+                           <a:displayOrder>210</a:displayOrder>
+                           <ra:nativeAttributeName>Manager</ra:nativeAttributeName>
+                           <ra:frameworkAttributeName>Manager</ra:frameworkAttributeName>
+                        </xsd:appinfo>
+                     </xsd:annotation>
+                  </xsd:element>
+                  <xsd:element name="EmployeeNumber" type="xsd:string">
+                     <xsd:annotation>
+                        <xsd:appinfo>
+                           <a:displayOrder>100</a:displayOrder>
+                           <ra:nativeAttributeName>EmployeeNumber</ra:nativeAttributeName>
+                           <ra:frameworkAttributeName>__NAME__</ra:frameworkAttributeName>
+                        </xsd:appinfo>
+                     </xsd:annotation>
+                  </xsd:element>
+                  <xsd:element minOccurs="0" name="IPTelNum" type="xsd:string">
+                     <xsd:annotation>
+                        <xsd:appinfo>
+                           <a:displayOrder>220</a:displayOrder>
+                           <ra:nativeAttributeName>IPTelNum</ra:nativeAttributeName>
+                           <ra:frameworkAttributeName>IPTelNum</ra:frameworkAttributeName>
+                        </xsd:appinfo>
+                     </xsd:annotation>
+                  </xsd:element>
+                  <xsd:element minOccurs="0" name="CardID" type="xsd:string">
+                     <xsd:annotation>
+                        <xsd:appinfo>
+                           <a:displayOrder>230</a:displayOrder>
+                           <ra:nativeAttributeName>CardID</ra:nativeAttributeName>
+                           <ra:frameworkAttributeName>CardID</ra:frameworkAttributeName>
+                        </xsd:appinfo>
+                     </xsd:annotation>
+                  </xsd:element>
+                  <xsd:element minOccurs="0" name="RoomNumber" type="xsd:string">
+                     <xsd:annotation>
+                        <xsd:appinfo>
+                           <a:displayOrder>240</a:displayOrder>
+                           <ra:nativeAttributeName>RoomNumber</ra:nativeAttributeName>
+                           <ra:frameworkAttributeName>RoomNumber</ra:frameworkAttributeName>
+                        </xsd:appinfo>
+                     </xsd:annotation>
+                  </xsd:element>
+                  <xsd:element minOccurs="0" name="HonorificPostfix" type="xsd:string">
+                     <xsd:annotation>
+                        <xsd:appinfo>
+                           <a:displayOrder>250</a:displayOrder>
+                           <ra:nativeAttributeName>HonorificPostfix</ra:nativeAttributeName>
+                           <ra:frameworkAttributeName>HonorificPostfix</ra:frameworkAttributeName>
+                        </xsd:appinfo>
+                     </xsd:annotation>
+                  </xsd:element>
+                  <xsd:element minOccurs="0" name="GivenFamilyName" type="xsd:string">
+                     <xsd:annotation>
+                        <xsd:appinfo>
+                           <a:displayOrder>260</a:displayOrder>
+                           <ra:nativeAttributeName>GivenFamilyName</ra:nativeAttributeName>
+                           <ra:frameworkAttributeName>GivenFamilyName</ra:frameworkAttributeName>
+                        </xsd:appinfo>
+                     </xsd:annotation>
+                  </xsd:element>
+                  <xsd:element minOccurs="0" name="JobType" type="xsd:string">
+                     <xsd:annotation>
+                        <xsd:appinfo>
+                           <a:displayOrder>270</a:displayOrder>
+                           <ra:nativeAttributeName>JobType</ra:nativeAttributeName>
+                           <ra:frameworkAttributeName>JobType</ra:frameworkAttributeName>
+                        </xsd:appinfo>
+                     </xsd:annotation>
+                  </xsd:element>
+                  <xsd:element minOccurs="0" name="City" type="xsd:string">
+                     <xsd:annotation>
+                        <xsd:appinfo>
+                           <a:displayOrder>280</a:displayOrder>
+                           <ra:nativeAttributeName>City</ra:nativeAttributeName>
+                           <ra:frameworkAttributeName>City</ra:frameworkAttributeName>
+                        </xsd:appinfo>
+                     </xsd:annotation>
+                  </xsd:element>
+                  <xsd:element minOccurs="0" name="StreetAddress" type="xsd:string">
+                     <xsd:annotation>
+                        <xsd:appinfo>
+                           <a:displayOrder>290</a:displayOrder>
+                           <ra:nativeAttributeName>StreetAddress</ra:nativeAttributeName>
+                           <ra:frameworkAttributeName>StreetAddress</ra:frameworkAttributeName>
+                        </xsd:appinfo>
+                     </xsd:annotation>
+                  </xsd:element>
+                  <xsd:element minOccurs="0" name="Profession" type="xsd:string">
+                     <xsd:annotation>
+                        <xsd:appinfo>
+                           <a:displayOrder>300</a:displayOrder>
+                           <ra:nativeAttributeName>Profession</ra:nativeAttributeName>
+                           <ra:frameworkAttributeName>Profession</ra:frameworkAttributeName>
+                        </xsd:appinfo>
+                     </xsd:annotation>
+                  </xsd:element>
+                  <xsd:element minOccurs="0" name="Mobile" type="xsd:string">
+                     <xsd:annotation>
+                        <xsd:appinfo>
+                           <a:displayOrder>310</a:displayOrder>
+                           <ra:nativeAttributeName>Mobile</ra:nativeAttributeName>
+                           <ra:frameworkAttributeName>Mobile</ra:frameworkAttributeName>
+                        </xsd:appinfo>
+                     </xsd:annotation>
+                  </xsd:element>
+                  <xsd:element minOccurs="0" name="PropertyNumber" type="xsd:string">
+                     <xsd:annotation>
+                        <xsd:appinfo>
+                           <a:displayOrder>320</a:displayOrder>
+                           <ra:nativeAttributeName>PropertyNumber</ra:nativeAttributeName>
+                           <ra:frameworkAttributeName>PropertyNumber</ra:frameworkAttributeName>
+                        </xsd:appinfo>
+                     </xsd:annotation>
+                  </xsd:element>
+                  <xsd:element minOccurs="0" name="HonorificPrefix" type="xsd:string">
+                     <xsd:annotation>
+                        <xsd:appinfo>
+                           <a:displayOrder>330</a:displayOrder>
+                           <ra:nativeAttributeName>HonorificPrefix</ra:nativeAttributeName>
+                           <ra:frameworkAttributeName>HonorificPrefix</ra:frameworkAttributeName>
+                        </xsd:appinfo>
+                     </xsd:annotation>
+                  </xsd:element>
+               </xsd:sequence>
+            </xsd:complexType>
+         </xsd:schema>
+      </definition>
+   </schema>
+   <schemaHandling>
+      <objectType>
+         <kind>account</kind>
+         <intent>default</intent>
+         <displayName>Zamestnanec PSS</displayName>
+         <default>true</default>
+         <objectClass>ri:AccountObjectClass</objectClass>
+         <attribute>
+            <c:ref>ri:FirstName</c:ref>
+            <limitations>
+               <access>
+                  <read>true</read>
+                  <add>false</add>
+                  <modify>false</modify>
+               </access>
+            </limitations>
+            <inbound>
+               <strength>strong</strength>
+               <channel>http://midpoint.evolveum.com/xml/ns/public/provisioning/channels-3#reconciliation</channel>
+               <expression>
+                  <script xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                          xsi:type="c:ScriptExpressionEvaluatorType">
+                     <code>        
+        firstName=input.toLowerCase().capitalize().trim();
+        log.debug("### firstName: {}",firstName);
+        return firstName;
+    </code>
+                  </script>
+               </expression>
+               <target>
+                  <c:path>$user/givenName</c:path>
+               </target>
+            </inbound>
+         </attribute>
+         <attribute>
+            <c:ref>ri:LastName</c:ref>
+            <limitations>
+               <access>
+                  <read>true</read>
+                  <add>false</add>
+                  <modify>false</modify>
+               </access>
+            </limitations>
+            <inbound>
+            <!-- <authoritative>true</authoritative> -->
+               <strength>strong</strength>
+               <channel>http://midpoint.evolveum.com/xml/ns/public/provisioning/channels-3#reconciliation</channel>
+               <expression>
+                  <script xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                          xsi:type="c:ScriptExpressionEvaluatorType">
+                     <code>
+        lastName=input.toLowerCase().capitalize().trim();
+        log.debug("### LastName: {}",lastName);
+        return lastName;        
+    </code>
+                  </script>
+               </expression>
+               <target>
+                  <c:path>$user/familyName</c:path>
+               </target>
+            </inbound>
+         </attribute>
+         <attribute>
+            <c:ref>ri:EmployeeNumber</c:ref>
+            <limitations>
+               <access>
+                  <read>true</read>
+                  <add>false</add>
+                  <modify>false</modify>
+               </access>
+            </limitations>
+            <inbound>
+               <strength>strong</strength>
+               <channel>http://midpoint.evolveum.com/xml/ns/public/provisioning/channels-3#reconciliation</channel>
+               <expression>
+                  <script xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                          xsi:type="c:ScriptExpressionEvaluatorType">
+                     <code>
+        empNo=input.toString().trim();
+        log.debug("### employeeNumber: {}",empNo);
+        return empNo;
+    </code>
+                  </script>
+               </expression>
+               <target>
+                  <c:path>$user/employeeNumber</c:path>
+               </target>
+               <condition>
+                  <script xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                          xsi:type="c:ScriptExpressionEvaluatorType">
+                     <code>
+        input!=null
+    </code>
+                  </script>
+               </condition>
+            </inbound>
+         </attribute>
+         <attribute>
+            <c:ref>ri:GivenFamilyName</c:ref>
+            <limitations>
+               <access>
+                  <read>true</read>
+                  <add>false</add>
+                  <modify>false</modify>
+               </access>
+            </limitations>
+            <inbound>
+               <strength>strong</strength>
+               <channel>http://midpoint.evolveum.com/xml/ns/public/provisioning/channels-3#reconciliation</channel>
+               <expression>
+                  <script xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                          xsi:type="c:ScriptExpressionEvaluatorType">
+                     <code>
+        givenLastName=input.toLowerCase().capitalize().trim();
+        log.debug("### givenLastName: {}",givenLastName);
+        return givenLastName;        
+        
+    </code>
+                  </script>
+               </expression>
+               <target>
+                  <c:path>$user/extension/givenFamilyName</c:path>
+               </target>
+               <condition>
+                  <script xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                          xsi:type="c:ScriptExpressionEvaluatorType">
+                     <code>
+        input!=null
+        </code>
+                  </script>
+               </condition>
+            </inbound>
+         </attribute>
+         <attribute>
+            <c:ref>ri:Profession</c:ref>
+            <limitations>
+               <access>
+                  <read>true</read>
+                  <add>false</add>
+                  <modify>false</modify>
+               </access>
+            </limitations>            
+            <inbound>
+               <strength>strong</strength>
+               <expression>
+                  <script xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                          xsi:type="c:ScriptExpressionEvaluatorType">
+                     <code>
+        prof=input.toLowerCase().capitalize().trim();
+        log.debug("### profession: {}",prof);
+        return prof;  
+        
+    </code>
+                  </script>
+               </expression>
+               <target>
+                  <c:path>$user/extension/profession</c:path>
+               </target>
+               <condition>
+                  <script xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                          xsi:type="c:ScriptExpressionEvaluatorType">
+                     <code>
+        input!=null
+    </code>
+                  </script>
+               </condition>
+            </inbound>
+         </attribute>
+         <attribute>
+            <c:ref>ri:CostCenter</c:ref>
+            <limitations>
+               <access>
+                  <read>true</read>
+                  <add>false</add>
+                  <modify>false</modify>
+               </access>
+            </limitations>            
+            <inbound>
+               <strength>strong</strength>
+               <channel>http://midpoint.evolveum.com/xml/ns/public/provisioning/channels-3#reconciliation</channel>
+               <expression>
+                  <script xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                          xsi:type="c:ScriptExpressionEvaluatorType">
+                     <code>
+        cc=input.toLowerCase().capitalize().trim();
+        log.debug("### costCenter: {}",cc);
+        return cc;         
+    </code>
+                  </script>
+               </expression>
+               <target>
+                  <c:path>$user/costCenter</c:path>
+               </target>
+               <condition>
+                  <script xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                          xsi:type="c:ScriptExpressionEvaluatorType">
+                     <code>
+        input!=null
+    </code>
+                  </script>
+               </condition>
+            </inbound>
+         </attribute>
+          <attribute>
+            <c:ref>ri:CostCenterID</c:ref>
+            <limitations>
+               <access>
+                  <read>true</read>
+                  <add>false</add>
+                  <modify>false</modify>
+               </access>
+            </limitations>            
+            <inbound>
+               <strength>strong</strength>
+               <channel>http://midpoint.evolveum.com/xml/ns/public/provisioning/channels-3#reconciliation</channel>
+               <expression>
+                  <script xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                          xsi:type="c:ScriptExpressionEvaluatorType">
+                     <code>
+        cc=input.trim();
+        log.debug("### costCenterID: {}",cc);
+        return cc;         
+    </code>
+                  </script>
+               </expression>
+               <target>
+                  <c:path>$user/extension/costCenterID</c:path>
+               </target>
+               <condition>
+                  <script xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                          xsi:type="c:ScriptExpressionEvaluatorType">
+                     <code>
+        input!=null
+    </code>
+                  </script>
+               </condition>
+            </inbound>
+         </attribute>
+         
+         
+         <attribute>
+            <c:ref>ri:OrganizationID</c:ref>
+            <limitations>
+               <access>
+                  <read>true</read>
+                  <add>false</add>
+                  <modify>false</modify>
+               </access>
+            </limitations>            
+            <inbound>
+               <strength>strong</strength>
+               <expression>
+                  <script xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                          xsi:type="c:ScriptExpressionEvaluatorType">
+                     <code>
+        ou=input.toLowerCase().trim();
+        log.debug("### organizationID: {}",ou);
+        return ou;
+    </code>
+                  </script>
+               </expression>
+               <target>
+                  <c:path>$user/extension/organizationID</c:path>
+               </target>
+               <condition>
+                  <script xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                          xsi:type="c:ScriptExpressionEvaluatorType">
+                     <code>
+        input!=null
+    </code>
+                  </script>
+               </condition>
+            </inbound>
+         </attribute>
+         <attribute>
+            <c:ref>ri:Organization</c:ref>
+            <limitations>
+               <access>
+                  <read>true</read>
+                  <add>false</add>
+                  <modify>false</modify>
+               </access>
+            </limitations>            
+            <inbound>
+               <strength>strong</strength>
+               <channel>http://midpoint.evolveum.com/xml/ns/public/provisioning/channels-3#reconciliation</channel>
+               <expression>
+                  <script xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                          xsi:type="c:ScriptExpressionEvaluatorType">
+                     <code>
+        org=input.toLowerCase().capitalize().trim();
+        log.debug("### organization: {}",org);
+        return org;
+    </code>
+                  </script>
+               </expression>
+               <target>
+                  <c:path>$user/organizationalUnit</c:path>
+               </target>
+               <condition>
+                  <script xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                          xsi:type="c:ScriptExpressionEvaluatorType">
+                     <code>
+        input!=null
+    </code>
+                  </script>
+               </condition>
+            </inbound>
+            <inbound>               
+               <strength>strong</strength>
+               <expression>
+                  <value>Prvá stavebná sporiteľňa a.s.</value>
+               </expression>
+               <target>
+                  <c:path>organization</c:path>
+               </target>
+            </inbound>
+         </attribute>
+         <attribute>
+            <c:ref>ri:ProfessionID</c:ref>
+            <limitations>
+               <access>
+                  <read>true</read>
+                  <add>false</add>
+                  <modify>false</modify>
+               </access>
+            </limitations>            
+            <inbound>
+               <strength>strong</strength>
+               <channel>http://midpoint.evolveum.com/xml/ns/public/provisioning/channels-3#reconciliation</channel>
+               <expression>
+                  <script xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                          xsi:type="c:ScriptExpressionEvaluatorType">
+                     <code>
+        prof=input.toLowerCase().capitalize().trim();
+        log.debug("### professionID: {}",prof);
+        return prof;
+    </code>
+                  </script>
+               </expression>
+               <target>
+                  <c:path>$user/extension/professionID</c:path>
+               </target>
+               <condition>
+                  <script xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                          xsi:type="c:ScriptExpressionEvaluatorType">
+                     <code>
+        input!=null
+    </code>
+                  </script>
+               </condition>
+            </inbound>
+         </attribute>
+         <attribute>
+            <c:ref>ri:City</c:ref>
+            <limitations>
+               <access>
+                  <read>true</read>
+                  <add>false</add>
+                  <modify>false</modify>
+               </access>
+            </limitations>
+            <inbound>
+               <strength>strong</strength>
+               <expression>
+                  <script xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                          xsi:type="c:ScriptExpressionEvaluatorType">
+                     <code>
+        city=input.toLowerCase().capitalize().trim();
+        log.debug("### City: {}",city);
+        return city;        
+    </code>
+                  </script>
+               </expression>
+               <target>
+                  <c:path>$user/extension/city</c:path>
+               </target>
+               <condition>
+                  <script xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                          xsi:type="c:ScriptExpressionEvaluatorType">
+                     <code>
+        input!=null
+    </code>
+                  </script>
+               </condition>
+            </inbound>
+         </attribute>
+         <attribute>
+            <c:ref>ri:HonorificPrefix</c:ref>
+            <limitations>
+               <access>
+                  <read>true</read>
+                  <add>false</add>
+                  <modify>false</modify>
+               </access>
+            </limitations>
+            <inbound>
+               <strength>strong</strength>
+               <expression>
+                  <script xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                          xsi:type="c:ScriptExpressionEvaluatorType">
+                     <code>
+        prefix=input.trim();
+        log.debug("### Preffix: {}",prefix);
+        return prefix;
+    </code>
+                  </script>
+               </expression>
+               <target>
+                  <c:path>$user/honorificPrefix</c:path>
+               </target>
+               <condition>
+                  <script xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                          xsi:type="c:ScriptExpressionEvaluatorType">
+                     <code>
+        input!=null
+    </code>
+                  </script>
+               </condition>
+            </inbound>
+         </attribute>
+         <attribute>
+            <c:ref>ri:HonorificPostfix</c:ref>
+            <limitations>
+               <access>
+                  <read>true</read>
+                  <add>false</add>
+                  <modify>false</modify>
+               </access>
+            </limitations>
+            <inbound>
+               <strength>strong</strength>
+               <expression>
+                  <script xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                          xsi:type="c:ScriptExpressionEvaluatorType">
+                     <code>
+        suffix=input.trim();
+        log.debug("### Suffix: {}",suffix);
+        return suffix;
+    </code>
+                  </script>
+               </expression>
+               <target>
+                  <c:path>$user/honorificSuffix</c:path>
+               </target>
+               <condition>
+                  <script xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                          xsi:type="c:ScriptExpressionEvaluatorType">
+                     <code>
+        input!=null
+    </code>
+                  </script>
+               </condition>
+            </inbound>
+         </attribute>
+         <attribute>
+            <c:ref>ri:Mobile</c:ref>
+            <limitations>
+               <access>
+                  <read>true</read>
+                  <add>false</add>
+                  <modify>false</modify>
+               </access>
+            </limitations>            
+            <inbound>
+               <strength>strong</strength>
+               <expression>
+                  <script xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                          xsi:type="c:ScriptExpressionEvaluatorType">
+                     <code>
+        mobile=input.replaceAll("\\s","").trim();
+        log.debug("### mobile: {}",mobile);
+        return mobile;
+    </code>
+                  </script>
+               </expression>
+               <target>
+                  <c:path>$user/extension/mobile</c:path>
+               </target>
+               <condition>
+                  <script xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                          xsi:type="c:ScriptExpressionEvaluatorType">
+                     <code>
+        input!=null
+    </code>
+                  </script>
+               </condition>
+            </inbound>
+         </attribute>
+         <attribute>
+            <c:ref>ri:IPTelNum</c:ref>
+            <limitations>
+               <access>
+                  <read>true</read>
+                  <add>false</add>
+                  <modify>false</modify>
+               </access>
+            </limitations>            
+            <inbound>
+               <strength>strong</strength>
+               <expression>
+                  <script xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                          xsi:type="c:ScriptExpressionEvaluatorType">
+                     <code>
+        ipTelNum=input.replaceAll("\\s","").trim();
+        log.debug("### ipTel: {}",ipTelNum);
+        return ipTelNum;
+    </code>
+                  </script>
+               </expression>
+               <target>
+                  <c:path>$user/extension/ipTelNum</c:path>
+               </target>
+               <condition>
+                  <script xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                          xsi:type="c:ScriptExpressionEvaluatorType">
+                     <code>
+        input!=null
+    </code>
+                  </script>
+               </condition>
+            </inbound>
+         </attribute>
+         <attribute>
+            <c:ref>ri:Manager</c:ref>
+            <limitations>
+               <access>
+                  <read>true</read>
+                  <add>false</add>
+                  <modify>false</modify>
+               </access>
+            </limitations>
+            <inbound>
+               <strength>strong</strength>
+               <expression>
+                  <script xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                          xsi:type="c:ScriptExpressionEvaluatorType">
+                     <code>
+        if (input == null) {
+            return false
+            }
+            return true
+    </code>
+                  </script>
+               </expression>
+               <target>
+                  <c:path>$user/extension/manager</c:path>
+               </target>
+            </inbound>
+         </attribute>
+         <attribute>
+            <c:ref>ri:JobType</c:ref>
+            <limitations>
+               <access>
+                  <read>true</read>
+                  <add>false</add>
+                  <modify>false</modify>
+               </access>
+            </limitations>
+            <inbound>
+               <strength>strong</strength>
+               <expression>
+                  <script xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                          xsi:type="c:ScriptExpressionEvaluatorType">
+                     <code>
+        if (input !=null){
+            return input.toString().toUpperCase().trim();
+            }
+        else {
+            log.debug("##### -objTemplate: nie je naplneny employeeType, nastavujem default: FTE");
+            return 'FTE';
+        }
+    </code>
+                  </script>
+               </expression>
+               <target>
+                  <c:path>$user/employeeType</c:path>
+               </target>
+            </inbound>
+         </attribute>
+         <attribute>
+            <c:ref>ri:StreetAddress</c:ref>
+            <limitations>
+               <access>
+                  <read>true</read>
+                  <add>false</add>
+                  <modify>false</modify>
+               </access>
+            </limitations>
+            <inbound>
+               <strength>strong</strength>
+               <expression>
+                  <script xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                          xsi:type="c:ScriptExpressionEvaluatorType">
+                     <code>
+                     street=input.toString().capitalize().trim();
+        			 log.debug("### ipTel: {}",street);
+        			 return street;                     
+                    </code>
+                  </script>
+               </expression>
+               <target>
+                  <c:path>$user/extension/streetAddress</c:path>
+               </target>
+               <condition>
+                  <script xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                          xsi:type="c:ScriptExpressionEvaluatorType">
+                     <code>
+                        input!=null
+                    </code>
+                  </script>
+               </condition>
+            </inbound>
+         </attribute>
+         <attribute>
+            <c:ref>ri:PropertyNumber</c:ref>
+            <limitations>
+               <access>
+                  <read>true</read>
+                  <add>false</add>
+                  <modify>false</modify>
+               </access>
+            </limitations>
+            <inbound>
+               <strength>strong</strength>
+               <expression>
+                  <script xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                          xsi:type="c:ScriptExpressionEvaluatorType">
+                     <code>
+                    property=input.replaceAll("\\s","").trim().toUpperCase();
+        			log.debug("### propertyNumber: {}",property);
+        			return property;
+                    </code>
+                  </script>
+               </expression>
+               <target>
+                  <c:path>$user/extension/propertyNumber</c:path>
+               </target>
+               <condition>
+                  <script xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                          xsi:type="c:ScriptExpressionEvaluatorType">
+                     <code>
+                        input!=null
+                    </code>
+                  </script>
+               </condition>
+            </inbound>
+         </attribute>
+         <attribute>
+            <c:ref>ri:RoomNumber</c:ref>
+            <limitations>
+               <access>
+                  <read>true</read>
+                  <add>false</add>
+                  <modify>false</modify>
+               </access>
+            </limitations>            
+            <inbound>
+               <strength>strong</strength>
+               <expression>
+                  <script xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                          xsi:type="c:ScriptExpressionEvaluatorType">
+                     <code>
+                    room=input.replaceAll("\\s","").trim().toUpperCase();
+        			log.debug("### roomNumber: {}",room);
+        			return room;        			
+                    </code>
+                  </script>
+               </expression>
+               <target>
+                  <c:path>$user/extension/roomNumber</c:path>
+               </target>
+               <condition>
+                  <script xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                          xsi:type="c:ScriptExpressionEvaluatorType">
+                     <code>
+                        input!=null
+                    </code>
+                  </script>
+               </condition>
+            </inbound>
+         </attribute>
+         <attribute>
+            <c:ref>ri:CardID</c:ref>
+            <limitations>
+               <access>
+                  <read>true</read>
+                  <add>false</add>
+                  <modify>false</modify>
+               </access>
+            </limitations>
+            <inbound>
+               <strength>strong</strength>
+               <expression>
+                  <script xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                          xsi:type="c:ScriptExpressionEvaluatorType">
+                     <code>
+        			card=input.trim();
+        			log.debug("### cardID: {}",card);
+        			return card;        			
+    				</code>
+                  </script>
+               </expression>
+               <target>
+                  <c:path>$user/extension/cardNumber</c:path>
+               </target>
+               <condition>
+                  <script xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                          xsi:type="c:ScriptExpressionEvaluatorType">
+                     <code>
+        input !=null
+    </code>
+                  </script>
+               </condition>
+            </inbound>
+         </attribute>
+         <attribute>
+            <c:ref>ri:Status</c:ref>
+            <limitations>
+               <access>
+                  <read>true</read>
+                  <add>false</add>
+                  <modify>false</modify>
+               </access>
+            </limitations>            
+            <inbound>
+               <strength>strong</strength>
+               <expression>
+                  <script xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                          xsi:type="c:ScriptExpressionEvaluatorType">
+                     <code>
+        if (input !=null) {
+            status=input.toString().toUpperCase().trim();
+            log.debug("### status: {}",status);
+            return status;            
+        }
+        else {
+            status='OUT';
+            log.debug("### status==null: {}",status);            
+            return status;
+        }
+    </code>
+                  </script>
+               </expression>
+               <target>
+                  <c:path>$user/extension/evidentiaryStatus</c:path>
+               </target>
+            </inbound>
+            <inbound>
+               <strength>strong</strength>
+               <expression>
+                  <script xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                          xsi:type="c:ScriptExpressionEvaluatorType">
+                     <code>
+        if (input != null &amp;&amp; input=='ACTIVE') {
+            return 'enabled'
+        }
+        if (input != null &amp;&amp; input=='INACTIVE') {
+            return 'disabled'
+        }
+        if (input == null) {
+            return 'archived'
+        }
+                         
+                    </code>
+                  </script>
+               </expression>
+               <target>
+                  <c:path>$user/activation/administrativeStatus</c:path>
+               </target>
+            </inbound>
+            <inbound>
+               <authoritative>false</authoritative>
+               <exclusive>false</exclusive>
+               <strength>weak</strength>
+               <expression>
+                  <value>sk</value>
+               </expression>
+               <target>
+                  <c:path>preferredLanguage</c:path>
+               </target>
+            </inbound>
+         </attribute>
+         <attribute>
+            <c:ref>ri:StartDate</c:ref>
+            <inbound>
+               <strength>strong</strength>
+               <target>
+                  <c:path>$user/extension/startDate</c:path>
+               </target>
+            </inbound>
+         </attribute>
+      </objectType>
+   </schemaHandling>
+   <capabilities>
+      <cachingMetadata>
+         <retrievalTimestamp>2018-03-09T13:23:24.171Z</retrievalTimestamp>
+         <serialNumber>7e96cb8d8d164a20-149a396f6fbe9e0b</serialNumber>
+      </cachingMetadata>
+      <native xmlns:cap="http://midpoint.evolveum.com/xml/ns/public/resource/capabilities-3"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:type="c:CapabilityCollectionType">
+         <cap:schema/>
+         <cap:liveSync/>
+         <cap:testConnection/>
+         <cap:create/>
+         <cap:read/>
+         <cap:update/>
+         <cap:delete/>
+         <cap:script>
+            <cap:host>
+               <cap:type>connector</cap:type>
+            </cap:host>
+         </cap:script>
+         <cap:addRemoveAttributeValues/>
+      </native>
+      <configured xmlns:cap="http://midpoint.evolveum.com/xml/ns/public/resource/capabilities-3"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:type="c:CapabilityCollectionType">
+         <cap:liveSync>
+            <cap:enabled>false</cap:enabled>
+         </cap:liveSync>
+         <cap:testConnection>
+            <cap:enabled>true</cap:enabled>
+         </cap:testConnection>
+         <cap:create>
+            <cap:enabled>false</cap:enabled>
+         </cap:create>
+         <cap:read>
+            <cap:enabled>true</cap:enabled>
+         </cap:read>
+         <cap:update>
+            <cap:enabled>false</cap:enabled>
+         </cap:update>
+         <cap:delete>
+            <cap:enabled>false</cap:enabled>
+         </cap:delete>
+         <cap:script>
+            <cap:enabled>false</cap:enabled>
+            <cap:host>
+               <cap:type>connector</cap:type>
+            </cap:host>
+         </cap:script>
+         <cap:addRemoveAttributeValues>
+            <cap:enabled>false</cap:enabled>
+         </cap:addRemoveAttributeValues>
+      </configured>
+   </capabilities>
+   <synchronization>
+      <objectSynchronization>
+         <name>Zamestnanec PSS</name>
+         <description>Import SAP HR (Employees/Temporary Employees)</description>
+         <objectClass>AccountObjectClass</objectClass>
+         <kind>account</kind>
+         <intent>default</intent>
+         <focusType>c:UserType</focusType>
+         <enabled>true</enabled>
+         <correlation>
+            <q:description>employeeNumber</q:description>
+            <equal xmlns="">
+               <path>employeeNumber</path>
+               <expression>
+                  <path>$account/attributes/ri:EmployeeNumber</path>
+               </expression>
+            </equal>
+         </correlation>
+         <reconcile>true</reconcile>
+         <opportunistic>true</opportunistic>
+         <reaction>
+            <situation>unmatched</situation>
+            <synchronize>true</synchronize>
+            <reconcile>true</reconcile>
+            <objectTemplateRef oid="feed0000-0000-0SAP-00HR-PSS888888099"
+                               relation="org:default"
+                               type="c:ObjectTemplateType">
+               <targetName>FullTimeEmployee Template</targetName>
+            </objectTemplateRef>
+            <action>
+               <handlerUri>http://midpoint.evolveum.com/xml/ns/public/model/action-3#addFocus</handlerUri>
+            </action>
+         </reaction>
+         <reaction>
+            <situation>unlinked</situation>
+            <synchronize>true</synchronize>
+            <reconcile>true</reconcile>
+            <action>
+               <handlerUri>http://midpoint.evolveum.com/xml/ns/public/model/action-3#link</handlerUri>
+            </action>
+         </reaction>
+         <reaction>
+            <situation>deleted</situation>
+            <synchronize>true</synchronize>
+            <reconcile>true</reconcile>
+            <action>
+               <handlerUri>http://midpoint.evolveum.com/xml/ns/public/model/action-3#inactivateFocus</handlerUri>
+            </action>
+            <action>
+               <handlerUri>http://midpoint.evolveum.com/xml/ns/public/model/action-3#unlink</handlerUri>
+            </action>
+         </reaction>
+      </objectSynchronization>
+   </synchronization>
+</resource>

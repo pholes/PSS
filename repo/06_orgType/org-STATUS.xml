@@ -1,0 +1,26 @@
+<org xmlns="http://midpoint.evolveum.com/xml/ns/public/common/common-3"
+     xmlns:q="http://prism.evolveum.com/xml/ns/public/query-3"
+     xmlns:c="http://midpoint.evolveum.com/xml/ns/public/common/common-3"
+     xmlns:t="http://prism.evolveum.com/xml/ns/public/types-3"
+     xmlns:org="http://midpoint.evolveum.com/xml/ns/public/common/org-3"
+     xmlns:icfs="http://midpoint.evolveum.com/xml/ns/public/connector/icf-1/resource-schema-3"
+     xmlns:ri="http://midpoint.evolveum.com/xml/ns/public/resource/instance-3"
+     oid="a3a2704e-5bce-4a1c-8b2b-618da725b27f"
+     version="2">
+   <name>STATUS</name>
+   <activation>
+      <administrativeStatus>enabled</administrativeStatus>
+      <effectiveStatus>enabled</effectiveStatus>
+      <validFrom>2018-03-08T11:57:05.676Z</validFrom>
+      <validityStatus>in</validityStatus>
+      <enableTimestamp>2018-03-08T11:57:05.653Z</enableTimestamp>
+      <validityChangeTimestamp>2018-03-08T11:57:05.739Z</validityChangeTimestamp>
+   </activation>   
+   <iteration>0</iteration>
+   <iterationToken/>
+   <displayName>Evidenčný stav</displayName>
+   <identifier>STATUS</identifier>
+   <requestable>false</requestable>
+   <orgType>OTHER</orgType>
+   <tenant>true</tenant>
+</org>

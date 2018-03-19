@@ -1,0 +1,368 @@
+<role xmlns="http://midpoint.evolveum.com/xml/ns/public/common/common-3"
+      xmlns:q="http://prism.evolveum.com/xml/ns/public/query-3"
+      xmlns:c="http://midpoint.evolveum.com/xml/ns/public/common/common-3"
+      xmlns:t="http://prism.evolveum.com/xml/ns/public/types-3"
+      xmlns:org="http://midpoint.evolveum.com/xml/ns/public/common/org-3"
+      xmlns:icfs="http://midpoint.evolveum.com/xml/ns/public/connector/icf-1/resource-schema-3"
+      xmlns:ri="http://midpoint.evolveum.com/xml/ns/public/resource/instance-3"
+      oid="feed0000-0000-0000-0000-PSS000000100">
+   <name>Zamestnanec PSS</name>
+   <displayName>PSS Zamestnanec</displayName>
+   <description>Extending End User role</description>   
+   <iteration>0</iteration>
+   <iterationToken/>
+   
+   <!-- GUI Authorizations -->
+   <authorization>
+   		<name>GUI Authorizations</name>
+   		<description>Authorization for GUI operations</description>
+   		<action>http://midpoint.evolveum.com/xml/ns/public/security/authorization-ui-3#user</action>   		
+   		<action>http://midpoint.evolveum.com/xml/ns/public/security/authorization-ui-3#users</action>
+   		<action>http://midpoint.evolveum.com/xml/ns/public/gui/component-3#focusTabObjectHistory</action>   		
+   		<!-- Autorizacia zaloziek
+   		<action>http://midpoint.evolveum.com/xml/ns/public/gui/component-3#focusTabBasic</action>
+   		<action>http://midpoint.evolveum.com/xml/ns/public/gui/component-3#focusTabProjections</action>
+   		<action>http://midpoint.evolveum.com/xml/ns/public/gui/component-3#focusTabAssignments</action>   		
+   		-->
+   </authorization>
+   
+   <!-- Extending End User-->
+   <authorization>
+      <name>Read all attributes -self</name>
+      <action>http://midpoint.evolveum.com/xml/ns/public/security/authorization-model-3#read</action>
+      <object>
+         <type>UserType</type>         
+           <owner>
+            <special>self</special>
+         </owner>
+      </object>
+   </authorization>
+   
+   <!-- Extending End User-->
+   <authorization>
+      <name>View self workflow tasks</name>
+      <action>http://midpoint.evolveum.com/xml/ns/public/security/authorization-model-3#read</action>
+      <object>
+         <type>TaskType</type>
+         <filter>
+            <q:equal>
+               <q:path>category</q:path>
+               <q:value>Workflow</q:value>
+            </q:equal>
+         </filter>
+      </object>
+   </authorization>
+   
+   <!-- Extending End User-->
+   <authorization>
+      <name>self-created-task-detail-read</name>
+      <description>Allow read self created task detail.</description>
+      <action>http://midpoint.evolveum.com/xml/ns/public/security/authorization-ui-3#task</action>
+   </authorization>
+   
+   <!-- Extending End User-->
+   <authorization>
+      <name>unassign-requestable-roles-request</name>
+      <description>Allow to unassign roles in AdminGUI-userProfile</description>
+      <action>http://midpoint.evolveum.com/xml/ns/public/security/authorization-ui-3#adminUnassign</action>
+      <phase>request</phase>
+      <object>
+         <special>self</special>
+      </object>
+   </authorization>
+	
+	<!-- Extending End User -->
+   <authorization>
+      <name>Read Lookups</name>
+      <description>Autorizacia umozni citat objekty typu LookupTable</description>
+      <action>http://midpoint.evolveum.com/xml/ns/public/security/authorization-model-3#read</action>
+      <object>
+         <type>LookupTableType</type>
+      </object>
+      <object>
+         <type>ShadowType</type>
+      </object>      
+      <object>
+         <type>RoleType</type>
+      </object>      
+      <object>
+         <type>ResourceType</type>
+      </object>      
+   </authorization>
+	
+	<!-- obmedzenie zobrazenia vsetkych pouzivatelov iba na typ EXT v List Users -->
+	<authorization>
+		<name>External - attribute visibility (allow read)</name>
+		<description>Autorizacia umoznuje zobrazit atributy na identite</description>
+		<action>http://midpoint.evolveum.com/xml/ns/public/security/authorization-model-3#read</action>	
+		<object>
+         <type>UserType</type>
+         <filter>
+            <q:and>               
+            <q:not>
+	         <q:equal>
+				<q:path>employeeType</q:path>
+                <q:value>ADMIN</q:value>			<!-- user: administrator -->
+	         </q:equal>
+            </q:not>
+            <q:not>
+            <q:equal>
+               <q:path>employeeType</q:path>
+               <q:value>OZ</q:value>
+            </q:equal>
+            </q:not>
+            </q:and>
+         </filter>
+		</object>
+	</authorization>
+	
+	<!-- ADD operation musi byt: request aj execution. Ak su atributy, zoznam by mal byt identicky -->
+	<!-- zobrazenie menu Users>New User  -->
+	<authorization>
+		<name>External - attribute visibility (allow add-request)</name>
+		<description>Autorizacia umoznuje zobrazit atributy na identite</description>
+		<action>http://midpoint.evolveum.com/xml/ns/public/security/authorization-model-3#add</action>		
+		<phase>request</phase>
+		<object>
+         <type>UserType</type>         
+		</object>
+	</authorization>
+	
+	<authorization>
+		<name>External - attribute visibility (allow add-execution)</name>
+		<description>Autorizacia umoznuje pridat atributy na identite</description>
+		<action>http://midpoint.evolveum.com/xml/ns/public/security/authorization-model-3#add</action>		
+		<phase>execution</phase>
+		<object>
+         <type>UserType</type>        
+		</object>
+	</authorization>	
+   
+   <!-- MODIFY operation musi byt: request aj execution. -->
+   <!-- ALLOW: spristupnenie viditelnosti uzivatelov typu TE, FTE a EXT v List Users -->
+   <authorization>
+		<name>External - attribute visibility (allow modify-request)</name>
+		<description>Autorizacia umoznuje zobrazit atributy na identite</description>
+		<action>http://midpoint.evolveum.com/xml/ns/public/security/authorization-model-3#modify</action>		
+		<phase>request</phase> 
+		<object>
+         <type>UserType</type>
+         <filter>          
+            <q:or>
+            <q:not>
+	         <q:equal>
+				<q:path>employeeType</q:path>
+                <q:value>ADMIN</q:value>			<!-- user: administrator -->
+	         </q:equal>
+            </q:not>                            
+               <q:equal>
+                  <q:path>employeeType</q:path>
+                  <q:value>EXT</q:value>
+               </q:equal>                             
+            </q:or>
+         </filter>
+		</object>
+		<item>givenName</item>   
+		<item>familyName</item>
+		<item>honorificPrefix</item>   
+		<item>honorificSuffix</item>
+		<item>preferredLanguage</item>
+		<item>extension/streetAddress</item>
+		<item>extension/propertyNumber</item>
+		<item>extension/city</item>
+		<item>extension/roomNumber</item>
+		<item>extension/companyEmail</item>
+		<item>extension/company</item>
+		<item>extension/mobile</item>
+							
+		<!-- disable visibility of ID -->
+		<!--
+		<item>givenName</item>   
+		<item>familyName</item>
+		<item>honorificPrefix</item>   
+		<item>honorificSuffix</item>
+		<item>preferredLanguage</item>
+		<item>extension/streetAddress</item>
+		<item>extension/propertyNumber</item>
+		<item>extension/city</item>
+		<item>extension/roomNumber</item>
+		<item>extension/companyEmail</item>
+		<item>extension/company</item>
+		<item>extension/mobile</item>
+		<item>extension/initialPassword</item>
+		
+		<item>assignment</item>
+		<item>name</item>   
+		<item>extension/voKonto</item>   
+		<item>fullName</item>
+		<item>employeeNumber</item>   
+		<item>employeeType</item>
+		<item>emailAddress</item>
+		<item>extension/objectSID</item>
+		<item>extension/cardNumber</item>   
+		<item>extension/evidentiaryStatus</item>
+		<item>extension/jira</item>
+		<item>extension/comment</item>
+		<item>organization</item>
+		<item>extension/givenFamilyName</item>
+		<item>extension/profession</item>
+		<item>extension/professionID</item>
+		<item>costCenter</item>      
+		<item>extension/costCenterID</item>
+		<item>organizationalUnit</item>	
+		<item>extension/organizationID</item>	
+		<item>extension/ipTelNum</item>
+		<item>extension/manager</item>	
+		<item>extension/startDate</item>
+		<item>extension/managerID</item>
+		<item>extension/managerEmail</item>
+		<item>extension/regionalManager</item>
+		<item>extension/regionalManagerID</item>
+		<item>extension/regionalManagerEmail</item>
+		<item>extension/regionalIT</item>
+		<item>extension/nbsCertificate</item>
+		<item>extension/nbsCertificate2</item>
+		<item>extension/nbsCertificate3</item>
+		<item>extension/assetNumber</item>
+		-->
+		<!-- ACTIVATION -->
+						
+		<!--
+		<item>activation/validTo</item> 			
+		<item>activation/validityStatus</item>
+		<item>activation/validityChangeTimestamp</item>			
+		<item>activation/lockoutExpirationTimestamp</item>		
+		<item>activation/lockoutStatus</item>
+		<item>activation/effectiveStatus</item>
+		<item>activation/enableTimestamp</item>
+		<item>activation/lockoutStatus</item>		
+		-->
+	</authorization>
+	
+	<!-- DENY: spustenie ulohy nad uzivatelmi typu TE, FTE v List Users -->
+	<authorization>
+		<name>External - attribute visibility (allow modify -execution)</name>
+		<description>Autorizacia umoznuje zobrazit atributy na identite</description>
+		<action>http://midpoint.evolveum.com/xml/ns/public/security/authorization-model-3#modify</action>		
+		<phase>execution</phase>
+		<object>
+         <type>UserType</type>
+         <filter>            
+            <q:and>               
+            <q:not>
+	         <q:equal>
+				<q:path>employeeType</q:path>
+                <q:value>ADMIN</q:value>
+	         </q:equal>
+            </q:not>
+            <q:or>                
+               <q:equal>
+                  <q:path>employeeType</q:path>
+                  <q:value>EXT</q:value>
+               </q:equal>                             
+            </q:or>             
+            </q:and>         
+         </filter>
+		</object>
+		<!-- disable visibility of ID -->
+		<!--
+		<item>givenName</item>   
+		<item>familyName</item>
+		<item>honorificPrefix</item>   
+		<item>honorificSuffix</item>
+		<item>preferredLanguage</item>
+		<item>extension/streetAddress</item>
+		<item>extension/propertyNumber</item>
+		<item>extension/city</item>
+		<item>extension/roomNumber</item>
+		<item>extension/companyEmail</item>
+		<item>extension/company</item>
+		<item>extension/mobile</item>
+		<item>extension/initialPassword</item>
+		
+		<item>assignment</item>
+		<item>name</item>   
+		<item>extension/voKonto</item>   
+		<item>fullName</item>
+		<item>employeeNumber</item>   
+		<item>employeeType</item>
+		<item>emailAddress</item>
+		<item>extension/objectSID</item>
+		<item>extension/cardNumber</item>   
+		<item>extension/evidentiaryStatus</item>
+		<item>extension/jira</item>
+		<item>extension/comment</item>
+		<item>organization</item>
+		<item>extension/givenFamilyName</item>
+		<item>extension/profession</item>
+		<item>extension/professionID</item>
+		<item>costCenter</item>      
+		<item>extension/costCenterID</item>
+		<item>organizationalUnit</item>	
+		<item>extension/organizationID</item>	
+		<item>extension/ipTelNum</item>
+		<item>extension/manager</item>	
+		<item>extension/startDate</item>
+		<item>extension/managerID</item>
+		<item>extension/managerEmail</item>
+		<item>extension/regionalManager</item>
+		<item>extension/regionalManagerID</item>
+		<item>extension/regionalManagerEmail</item>
+		<item>extension/regionalIT</item>
+		<item>extension/nbsCertificate</item>
+		<item>extension/nbsCertificate2</item>
+		<item>extension/nbsCertificate3</item>
+		<item>extension/assetNumber</item>
+		-->
+		<!-- ACTIVATION -->
+						
+		<!--
+		<item>activation/validTo</item> 			
+		<item>activation/validityStatus</item>
+		<item>activation/validityChangeTimestamp</item>			
+		<item>activation/lockoutExpirationTimestamp</item>		
+		<item>activation/lockoutStatus</item>
+		<item>activation/effectiveStatus</item>
+		<item>activation/enableTimestamp</item>
+		<item>activation/lockoutStatus</item>		
+		-->
+	</authorization>
+   
+   <authorization>
+		<name>External - assign, unassign (allow -request)</name>
+		<description>Autorizacia umoznuje priradit/odobrat identite Externistu</description>
+		<action>http://midpoint.evolveum.com/xml/ns/public/security/authorization-model-3#assign</action>
+		<action>http://midpoint.evolveum.com/xml/ns/public/security/authorization-model-3#unassign</action>
+		<phase>request</phase>
+		<object>
+         <type>UserType</type>
+      </object>                  
+   </authorization> 
+   
+   <!-- 
+   <adminGuiConfiguration>   
+   </adminGuiConfiguration>
+   -->  
+	  
+   <condition>
+        <source>
+            <path>$user/employeeType</path>
+        </source>
+        <source>
+            <path>$user/activation/administrativeStatus</path>
+        </source>
+        <expression>
+            <script>
+                <code>
+                    employeeType == 'FTE' &amp;&amp;
+                    !com.evolveum.midpoint.xml.ns._public.common.common_3.ActivationStatusType.ARCHIVED.equals(administrativeStatus) &amp;&amp;
+                    !com.evolveum.midpoint.xml.ns._public.common.common_3.ActivationStatusType.DISABLED.equals(administrativeStatus)
+                </code>
+            </script>
+        </expression>
+    </condition>
+   
+   <requestable>false</requestable>
+   <delegable>false</delegable>
+   <roleType>ORG</roleType>    
+</role>

@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objectTemplate 
+                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                xmlns="http://midpoint.evolveum.com/xml/ns/public/common/common-3"
+                xmlns:c="http://midpoint.evolveum.com/xml/ns/public/common/common-3"
+                xmlns:t="http://prism.evolveum.com/xml/ns/public/types-3"
+                xmlns:org="http://midpoint.evolveum.com/xml/ns/public/common/org-3"
+                xmlns:q="http://prism.evolveum.com/xml/ns/public/query-3"                
+                oid="feed0000-0000-0SAP-00HR-PSS999999120" >
+    <name>[userType] OnDelete Action</name>
+    
+    <!-- iteration -->
+    <iteration>
+      <maxIterations>20</maxIterations>
+      <tokenExpression>
+         <script>
+            <code>
+                    if (iteration == 0) {
+                        return "";
+                    } else {
+                        return "" + (iteration + 1);
+                    }
+                </code>
+         </script>
+      </tokenExpression>
+   </iteration>
+   
+	<!-- nastavenie datumu deaktivacie, tento sa uplatnuje na vsetky objekt user -->
+      <mapping>
+         <name>[userType:OnDelete] Set validTo to current date</name>
+         <description>Nastavenie datumu deaktivacie, tento sa uplatnuje na vsetky objekt user</description>
+         <strength>strong</strength>
+         <!-- <trace>true</trace> -->
+         <expression>
+            <script>
+               <code>				
+				return basic.currentDateTime();
+			</code>
+            </script>
+         </expression>
+         <target>
+            <c:path>activation/validTo</c:path>
+         </target>
+      </mapping>
+                  
+      <!-- nastavenie evidencneho stavu pri odchode zamestnanca -->     
+	  <mapping>
+         <name>[userType:OnDelete] Set HRStatus to ARCHIVED</name>
+         <description>Nastavenie evidencneho stavu ARCHIVED pri odchode zamestnanca</description>
+         <strength>strong</strength>
+         <!-- <trace>true</trace> -->
+              <expression>
+                  <value>OUT</value>
+               </expression>
+        <target>
+            <c:path>$focus/extension/evidentiaryStatus</c:path>
+         </target>         
+      </mapping>      
+      
+      
+      <!-- nastavenie AdministrativeStatus v pripade mimoevidencneho stavu >> ARCHIVED-->
+      <mapping>
+         <name>[userType:OnDelete] Archivacia zamestnanca, org.jednotky, role</name>
+         <description>Nastavenie AdministrativeStatus v pripade mimoevidencneho stavu >> ARCHIVED</description>
+         <strength>strong</strength>
+         <!-- <trace>true</trace> -->
+         <expression>
+            <script>
+               <code>                    
+                    com.evolveum.midpoint.xml.ns._public.common.common_3.ActivationStatusType.ARCHIVED
+                </code>
+            </script>
+         </expression>
+         <target>
+            <c:path>$focus/activation/administrativeStatus</c:path>
+         </target>
+      </mapping>     
+            
+      <!-- toto treba do role Zamestnanec ako exclusion priradenie org.struktury-->
+      <!-- Odobranie z platnej OS -->       
+      <mapping>
+         <name>[userType:OnDelete] Odobranie z platnej Paralelnej OS</name>
+         <description>Odobranie z platnej OS</description>                  
+         <strength>strong</strength>         
+         <source>
+            <name>evidentiaryStatus</name>
+            <c:path>$focus/extension/evidentiaryStatus</c:path>
+         </source>    
+         <expression>
+            <assignmentTargetSearch>
+               <targetType>c:OrgType</targetType>
+               <filter>
+                  <q:equal>
+                     <q:path>c:identifier</q:path>
+                     <expression>
+                        <path>$evidentiaryStatus</path>
+                     </expression>
+                  </q:equal>
+               </filter>
+            </assignmentTargetSearch>
+         </expression>
+         <target>
+            <c:path>assignment</c:path>
+         </target>
+      </mapping>
+      
+      <!-- Priradenie do platnej organizacnej struktury -->
+   <mapping>
+      <name>Priradenie do platnej OŠ, na základe organizationID</name>
+      <strength>strong</strength>
+      <source>
+         <c:path>$user/extension/organizationID</c:path>
+      </source>
+      <source>
+         <c:path>$user/employeeType</c:path>
+      </source>
+      <source>
+         <c:path>$user/extension/manager</c:path>
+      </source>
+      <source>
+         <c:path>$user/activation/administrativeStatus</c:path>
+      </source>
+      <expression>
+         <assignmentTargetSearch>
+            <targetType>c:OrgType</targetType>
+            <filter>
+               <q:equal>
+                  <q:path>c:name</q:path>
+                  <expression>
+                     <path>$organizationID</path>			<!-- nazov OJ sa zhoduje s organizationID -->
+                  </expression>
+               </q:equal>
+            </filter>
+            <createOnDemand>true</createOnDemand>			<!-- ak neexistuje, tak vytvorime OJ typu MAIN-->
+            <populateObject>
+               <populateItem>
+                  <expression>
+                     <c:path>$organizationID</c:path>
+                  </expression>
+                  <target>
+                     <c:path>name</c:path>
+                  </target>
+               </populateItem>
+               <populateItem>
+                  <expression>
+                     <value>MAIN</value>
+                  </expression>
+                  <target>
+                     <c:path>orgType</c:path>
+                  </target>
+               </populateItem>
+            </populateObject>
+         </assignmentTargetSearch>
+      </expression>
+      <target>
+         <c:path>assignment</c:path>
+      </target>
+      <condition>
+         <script>
+            <code>!manager &amp;&amp; 
+            (employeeType == 'FTE'|| employeeType=='TE') &amp;&amp; 
+            organizationID != null &amp;&amp;
+            !com.evolveum.midpoint.xml.ns._public.common.common_3.ActivationStatusType.DISABLED.equals(administrativeStatus)&amp;&amp;
+            !com.evolveum.midpoint.xml.ns._public.common.common_3.ActivationStatusType.ARCHIVED.equals(administrativeStatus)
+            </code>
+         </script>
+      </condition>
+   </mapping>
+      
+      
+      <!-- toto do metarole pre pracovnu poziciu
+      rola sa prideluje len aktivnym uzivatelom
+       -->
+      <!-- Odobranie role: pracovna pozicia, podla plansId --> 
+      <!-- 
+      <mapping>
+         <name>[userType:OnDelete] Odobranie role: Pracovna Pozicia</name>
+         <description>Odobranie role: pracovna pozicia, podla plansId</description>
+         <exclusive>true</exclusive>
+         <strength>strong</strength>         
+         <source>
+            <name>employeeType</name>
+            <c:path>$focus/employeeType</c:path>
+         </source>
+         <source>
+            <name>evidentiaryStatus</name>
+            <c:path>$focus/extension/evidentiaryStatus</c:path>
+         </source>
+         <source>
+            <name>plansId</name>
+            <c:path>extension/plansId</c:path>
+         </source>
+         <expression>
+            <assignmentTargetSearch xsi:type="c:SearchObjectRefExpressionEvaluatorType">
+               <targetType>c:RoleType</targetType>
+               <filter>
+                  <q:and>
+                     <q:equal>
+                        <q:path>c:identifier</q:path>
+                        <expression>
+                           <path>$plansId</path>
+                        </expression>
+                     </q:equal>
+                     <q:equal>
+                        <q:path>c:roleType</q:path>
+                        <expression>
+                           <value>POS</value>
+                        </expression>
+                     </q:equal>
+                  </q:and>
+               </filter>
+            </assignmentTargetSearch>
+         </expression>
+         <target>
+            <c:path>assignment</c:path>
+         </target>         
+         <condition>
+            <script xsi:type="c:ScriptExpressionEvaluatorType">
+               <code>
+                	evidentiaryStatus != null &amp;&amp; evidentiaryStatus == '1' &amp;&amp; employeeType != null &amp;&amp; (employeeType == 'FTE' || employeeType == 'OTHER')
+                </code>
+            </script>
+         </condition>         
+      </mapping>     
+      -->
+      
+      <!-- rola zamestnanec -->
+      <!-- Odobranie role End User, v pripade neaktivnej identity -->       
+      
+      <mapping>
+         <name>[userType:OnDelete] Odobranie role End User</name>
+         <description>Odobranie role End User, v pripade neaktivnej identity</description>
+         <exclusive>true</exclusive>
+         <strength>strong</strength>         
+         <source>
+            <name>evidentiaryStatus</name>
+            <c:path>$focus/extension/evidentiaryStatus</c:path>
+         </source>
+         <expression>
+            <assignmentTargetSearch>
+                <targetType>c:RoleType</targetType>
+                <oid>00000000-0000-0000-0000-000000000008</oid> <!-- End User -->
+            </assignmentTargetSearch> 
+         </expression>
+         <target>
+            <c:path>assignment</c:path>
+         </target>
+         <condition>
+            <script xsi:type="c:ScriptExpressionEvaluatorType">
+               <code>
+                	evidentiaryStatus != null &amp;&amp; evidentiaryStatus == 'ACTIVE'
+                </code>
+            </script>
+         </condition>
+      </mapping>
+            
+      <mapping>
+         <name>[userType:OnDelete] Odobranie role Zamestnanec PSS</name>
+         <description>Odobranie role Zamestnanec PSS, v pripade neaktivnej identity</description>         
+         <strength>strong</strength>         
+         <source>
+            <name>evidentiaryStatus</name>
+            <c:path>$focus/extension/evidentiaryStatus</c:path>
+         </source>
+         <expression>
+            <assignmentTargetSearch>
+                <targetType>c:RoleType</targetType>
+                <oid>feed0000-0000-0000-0000-PSS000000100</oid> <!-- Zamestnanec PSS -->
+            </assignmentTargetSearch> 
+         </expression>
+         <target>
+            <c:path>assignment</c:path>
+         </target>
+         <condition>
+            <script xsi:type="c:ScriptExpressionEvaluatorType">
+               <code>
+                	evidentiaryStatus != null &amp;&amp; evidentiaryStatus == 'ACTIVE'
+                </code>
+            </script>
+         </condition>
+      </mapping>        
+   </objectTemplate>
+   

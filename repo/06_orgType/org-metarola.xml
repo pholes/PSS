@@ -1,0 +1,61 @@
+<role xmlns="http://midpoint.evolveum.com/xml/ns/public/common/common-3"
+      xmlns:q="http://prism.evolveum.com/xml/ns/public/query-3"
+      xmlns:c="http://midpoint.evolveum.com/xml/ns/public/common/common-3"
+      xmlns:t="http://prism.evolveum.com/xml/ns/public/types-3"
+      xmlns:org="http://midpoint.evolveum.com/xml/ns/public/common/org-3"
+      xmlns:icfs="http://midpoint.evolveum.com/xml/ns/public/connector/icf-1/resource-schema-3"
+      xmlns:ri="http://midpoint.evolveum.com/xml/ns/public/resource/instance-3"
+      oid="3feb3def-2240-4692-8716-64def49628bb"
+      version="1">
+   <name>_org-status-metarole</name>
+   
+   <!-- toto je tu zbytocne -->
+   <!-- 
+   <inducement>
+        <policyRule>
+            <policyConstraints>
+                <exclusion>
+                    <targetRef oid="1dc22bba0-b262-4b59-abc6-5d09e6bfb135" type="OrgType"/>
+                </exclusion>
+            </policyConstraints>
+            <policyActions>
+                <prune/>
+            </policyActions>
+        </policyRule>
+    </inducement>
+
+    <inducement>
+        <policyRule>
+            <policyConstraints>
+                <exclusion>
+                    <targetRef oid="d409f22b-c3bb-4667-90d9-d4e806b45d43" type="OrgType"/>
+                </exclusion>
+            </policyConstraints>
+            <policyActions>
+                <prune/>
+            </policyActions>
+        </policyRule>
+    </inducement>
+
+    <inducement>
+        <policyRule>
+            <policyConstraints>
+                <exclusion>
+                    <targetRef oid="d2f2c2e9-6e9d-4670-9df4-00f6890e5b6e" type="OrgType"/>
+                </exclusion>
+            </policyConstraints>
+            <policyActions>
+                <prune/>
+            </policyActions>
+        </policyRule>
+    </inducement>
+   -->
+   <activation>
+      <effectiveStatus>enabled</effectiveStatus>
+      <enableTimestamp>2018-03-12T11:57:33.564Z</enableTimestamp>
+   </activation>
+   <iteration>0</iteration>
+   <iterationToken/>
+   <requestable>false</requestable>
+   <roleType>SYS</roleType>
+</role>
